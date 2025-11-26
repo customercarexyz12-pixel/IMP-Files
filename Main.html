@@ -1,0 +1,75 @@
+Slip 1.
+1.	Take multiple files as Command Line Arguments and print their inode numbers and file types.
+
+#include<stdlib.h> 
+#include<stdio.h> 
+#include<string.h> 
+main(int argc, char *argv[]) 
+{ 
+char d[50]; 
+if(argc==2) 
+{ 
+bzero(d,sizeof(d)); 
+strcat(d,"ls "); 
+strcat(d,"-i "); 
+strcat(d,argv[1]); 
+system(d); 
+} 
+else 
+printf("\nInvalid No. of inputs"); 
+} 
+output: 
+student@ubuntu:~$ mkdir dd 
+student@ubuntu:~$ cd dd 
+student@ubuntu:~/dd$ cat >f1 
+hello 
+^z 
+student@ubuntu:~/dd$ cd 
+student@ubuntu:~$gcc –o flist.out flist.c 
+student@ubuntu:~$./flist.out dd 
+hello 
+46490 f1
+
+2.	Write a C program to send SIGALRM signal by child process to parent process and parent process make a provision to catch the signal and display alarm is fired.(Use Kill, fork, signal and sleep system call).
+Solution:- 
+		#include <fcntl.h> 
+                    	 #include <unistd.h>
+#include <stdio.h>
+#include<signal.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include <stdlib.h> 
+void Dingdong()
+{ 
+printf("Ding!"); 
+exit(1); 
+} 
+int main(int argc, char *argv[]) 
+{ 
+if(argc!=3) 
+{ 
+printf("How much seconds you want to sleep the child process\n"); 
+} 
+int PauseSecond=(argv[1]); 
+{ 
+if(fork()==0) 
+{ 
+printf("waiting for alarm to go off\n"); 
+printf("%d second pause",PauseSecond); 
+sleep(PauseSecond); 
+kill(getpid(),SIGALRM); 
+} 
+else { 
+printf("Alarm application starting\n", getpid()); 
+signal(SIGALRM,Dingdong); 
+printf("done"); 
+} 
+} 
+}
+
+
+
+
+Slip 2
+1.	Write a C program to find file properties such as inode number, number of hard link, File permissions, File size, File access and modification time and so on of a given file using stat() system call.
+Solution:- 
