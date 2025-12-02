@@ -1,0 +1,904 @@
+Slip 1
+1)	Create a container, add row inside it and add 3 columns inside row using Bootstrap.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Layout</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 bg-primary text-white p-3">
+            Column 1
+        </div>
+        <div class="col-md-4 bg-success text-white p-3">
+            Column 2
+        </div>
+        <div class="col-md-4 bg-danger text-white p-3">
+            Column 3
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+Slip 2
+1.	Write the HTML5 code for generating the form as shown below. Apply the internal CSS to the following form to change the font size of the heading to 6pt and change the color to red and also change the background color to yellow.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Management Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #e0f7fa;
+        padding: 20px;
+    }
+    h2 {
+        font-size: 6pt;  /* As required */
+        color: red;      /* As required */
+        text-align: center;
+    }
+    .form-box {
+        width: 350px;
+        margin: auto;
+        padding: 20px;
+        background: yellow; /* Required background color */
+        border-radius: 10px;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+    }
+    .priority-group {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+    button {
+        padding: 8px 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        color: white;
+    }
+    .submit-btn {
+        background: green;
+    }
+    .clear-btn {
+        background: blue;
+    }
+</style>
+</head>
+
+<body>
+<h2>Project Management</h2>
+<div class="form-box">
+    <form>
+        <label>Project Name</label>
+        <input type="text" placeholder="project name">
+        <label>Assigned To</label>
+        <input type="text" placeholder="Enter Name">
+        <label>Start Date</label>
+        <input type="date">
+        <label>End Date</label>
+        <input type="date">
+        <label>Priority</label>
+        <div class="priority-group">
+            <input type="radio" name="p"> High
+            <input type="radio" name="p"> Average
+            <input type="radio" name="p"> Low
+        </div>
+        <label>Description</label>
+        <textarea rows="3" placeholder="Enter description"></textarea>
+        <button class="submit-btn">Submit</button>
+        <button type="reset" class="clear-btn">Clear</button>
+    </form>
+</div>
+</body>
+</html>
+Slip 3
+1.	Write a bootstrap application to display thumbnails of the images.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Thumbnails</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Image Thumbnails</h2>
+
+    <div class="row g-3">
+
+        <!-- Thumbnail 1 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" class="card-img-top img-fluid" alt="Thumbnail 1">
+                <div class="card-body text-center">
+                    <p class="card-text">Image 1</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnail 2 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" class="card-img-top img-fluid" alt="Thumbnail 2">
+                <div class="card-body text-center">
+                    <p class="card-text">Image 2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnail 3 -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300" class="card-img-top img-fluid" alt="Thumbnail 3">
+                <div class="card-body text-center">
+                    <p class="card-text">Image 3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+Slip 4:
+1.	Write a bootstrap program for the following “The .table class adds basic styling (light padding and only horizontal dividers) to a table” The table can have the first name, last name, and email id as columns.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bootstrap table Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h3> User Details table </h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pratik</td>
+                    <td>Kevate</td>
+                    <td>pratikkevate71@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Shravani</td>
+                    <td>Kulkarni</td>
+                    <td>shravani71@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Aditya</td>
+                    <td>Kanpile</td>
+                    <td>Aditya71@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+Slip 5
+1.	Write a HTML code, which generate the following output [ Apply border, border radius tags]
+Solution: <!DOCTYPE html>
+<html>
+<head>
+    <title>List of Persons</title>
+
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 30px auto;
+            border: 2px solid black;
+            border-radius: 10px;
+            overflow: hidden; /* required for border-radius to apply on table edges */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .main-title {
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid black;
+            padding: 10px;
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+
+<body>
+
+<table>
+    <tr>
+        <td class="main-title" colspan="4">List of Persons</td>
+    </tr>
+    <tr>
+        <th>Srno</th>
+        <th>Person Name</th>
+        <th>Age</th>
+        <th>Country</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>
+
+Slip 6
+1.	Write an HTML 5 program for student registration form for college admission. Use input type like search, email, date etc.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Form</title>
+</head>
+<body>
+<h2>College Admission – Student Registration Form</h2>
+<form>
+    <label>Full Name:</label><br>
+    <input type="text" placeholder="Enter your name" required><br><br>
+    <label>Email ID:</label><br>
+    <input type="email" placeholder="Enter your email" required><br><br>
+    <label>Search Course:</label><br>
+    <input type="search" placeholder="Search course"><br><br>
+    <label>Date of Birth:</label><br>
+    <input type="date" required><br><br>
+    <label>Contact Number:</label><br>
+    <input type="tel" placeholder="9876543210" required><br><br>
+    <label>Gender:</label><br>
+    <input type="radio" name="gender"> Male
+    <input type="radio" name="gender"> Female
+    <input type="radio" name="gender"> Other<br><br>
+    <label>Select Course:</label><br>
+    <select>
+        <option>B.Sc</option>
+        <option>B.Com</option>
+        <option>BCA</option>
+        <option>BA</option>
+        <option>M.Sc</option>
+    </select><br><br>
+    <label>Address:</label><br>
+    <textarea rows="3" cols="30"></textarea><br><br>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+</form>
+</body>
+</html>
+
+Slip 7
+1.	Create a web page that shows use of transition properties, transition delay and duration effect.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Transition Example</title>
+<style>
+    .box {
+        width: 150px;
+        height: 150px;
+        background: orange;
+        margin: 50px;
+        border-radius: 10px;
+        /* Transition Effects */
+        transition-property: width, height, background-color;
+        transition-duration: 2s;     /* animation time */
+        transition-delay: 0.5s;      /* wait before starting */
+    }
+    .box:hover {
+        width: 250px;
+        height: 250px;
+        background: rgb(0, 140, 255);
+    }
+    h2 {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h2>CSS Transition, Delay & Duration Demo</h2>
+<div class="box"></div>
+</body>
+</html>
+
+Slip 8
+1.	Write a HTML code which will divide a web page in three frames. First frame should consist of the company name as heading. Second frame should consist of the names of departments with hyperlink. Once click on any department, it should display information of that department in the third frame.
+Solution:  
+Slip 9
+1.	Write an HTML 5 program for student registration form for college admission. Use input type like search, email, date etc.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Admission Form</title>
+<style>
+    body{font-family: Arial; padding:20px;}
+    form{
+        width: 380px;
+        padding: 20px;
+        border:1px solid #ccc;
+        border-radius:8px;
+    }
+    input, select{
+        width:100%;
+        padding:8px;
+        margin:8px 0;
+        border:1px solid #777;
+        border-radius:4px;
+    }
+    label{font-weight:bold;}
+</style>
+</head>
+<body>
+<h2>Student Registration Form</h2>
+<form>
+    <label>Full Name:</label>
+    <input type="text" placeholder="Enter your name" required>
+    <label>Father's Name:</label>
+    <input type="text" required>
+    <label>Search Course:</label>
+    <input type="search" placeholder="Search course">
+    <label>Email:</label>
+    <input type="email" placeholder="example@mail.com" required>
+    <label>Date of Birth:</label>
+    <input type="date" required>
+    <label>Mobile Number:</label>
+    <input type="tel" placeholder="9876543210" required>
+    <label>Gender:</label>
+    <input type="radio" name="g"> Male 
+    <input type="radio" name="g"> Female
+    <br><br>
+    <label>Select Course:</label>
+    <select required>
+        <option>Select Course</option>
+        <option>BCA</option>
+        <option>BSc IT</option>
+        <option>MCA</option>
+    </select>
+    <label>Address:</label>
+    <input type="text">
+    <label>Upload Photo:</label>
+    <input type="file">
+    <label>Agree to Terms:</label>
+    <input type="checkbox" required> I Agree
+    <br><br>
+    <input type="submit" value="Submit Form">
+</form>
+</body>
+</html>
+
+Slip 10
+1.	Design an appropriate HTML form for customer registration visiting a departmental store. Form should consist of fields such as name, contact no, gender, preferred days of purchasing, favorite item (to be selected from a list of items), suggestions etc. You should provide a button to submit as well as reset the form contents.
+Solution: <!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Registration Form</title>
+    <meta charset="UTF-8">
+    <style>
+        body{
+            font-family: Arial;
+            padding: 20px;
+        }
+        form{
+            width: 380px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input, select, textarea{
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #777;
+            border-radius: 4px;
+        }
+        label{font-weight: bold;}
+    </style>
+</head>
+<body>
+<h2>Customer Registration Form</h2>
+<form>
+    <label>Full Name:</label>
+    <input type="text" required placeholder="Enter your name">
+    <label>Contact Number:</label>
+    <input type="tel" required placeholder="Mobile number">
+    <label>Gender:</label><br>
+    <input type="radio" name="g" value="Male"> Male
+    <input type="radio" name="g" value="Female"> Female
+    <input type="radio" name="g" value="Other"> Other
+    <br><br>
+    <label>Preferred Days of Purchasing:</label><br>
+    <input type="checkbox" value="Monday"> Monday
+    <input type="checkbox" value="Friday"> Friday
+    <input type="checkbox" value="Sunday"> Sunday
+    <br><br>
+    <label>Favorite Item:</label>
+    <select>
+        <option>Select an Item</option>
+        <option>Groceries</option>
+        <option>Clothes</option>
+        <option>Electronics</option>
+        <option>Cosmetics</option>
+        <option>Furniture</option>
+    </select>
+    <label>Suggestions:</label>
+    <textarea rows="4" placeholder="Enter your suggestions..."></textarea>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
+</body>
+</html>
+
+Slip 11
+1.	Create a useful web with the following information and structure using HTML5 tags like: 
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departmental Store Website</title>
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <h1>Welcome to City Departmental Store</h1>
+    <p>Your one-stop destination for daily essentials</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#">Home</a> |
+    <a href="#">Products</a> |
+    <a href="#">Offers</a> |
+    <a href="#">Contact Us</a>
+</nav>
+<!-- MAIN CONTENT AREA -->
+<section>
+    <h2>Latest Offers</h2>
+    <p>Get up to <strong>40% OFF</strong> on groceries and home essentials.</p>
+    <h3>Why Shop With Us?</h3>
+    <ul>
+        <li>Daily fresh stock</li>
+        <li>Affordable prices</li>
+        <li>Wide range of products</li>
+        <li>Fast billing and online payments</li>
+    </ul>
+</section>
+<!-- ASIDE -->
+<aside>
+    <h3>Store Timings</h3>
+    <p>Mon–Sun: 8 AM – 10 PM</p>
+    <h3>Important Links</h3>
+    <ul>
+        <li><a href="#">Customer Registration</a></li>
+        <li><a href="#">Membership Card</a></li>
+        <li><a href="#">Feedback Form</a></li>
+    </ul>
+</aside>
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2025 City Departmental Store. All rights reserved.</p>
+</footer>
+</body>
+</html>
+
+Slip 12
+1.	Design an HTML form to take the information of a customer for booking a travel plan consisting of fields such as name, address, contact no., gender, preferred season(Checkboxes), location type(to be selected from a list) etc. You should provide button to submit as well as reset the form contents.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Booking Form</title>
+</head>
+
+<body>
+
+<h2>Travel Plan Booking Form</h2>
+
+<form>
+
+    <label><b>Name:</b></label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label><b>Address:</b></label><br>
+    <textarea name="address" rows="3" cols="30" required></textarea><br><br>
+    <label><b>Contact Number:</b></label><br>
+    <input type="tel" name="contact" required><br><br>
+    <label><b>Gender:</b></label><br>
+    <input type="radio" name="g" value="Male"> Male
+    <input type="radio" name="g" value="Female"> Female
+    <input type="radio" name="g" value="Other"> Other
+    <br><br>
+    <label><b>Preferred Season:</b></label><br>
+    <input type="checkbox" value="Winter"> Winter
+    <input type="checkbox" value="Summer"> Summer
+    <input type="checkbox" value="Rainy"> Rainy
+    <br><br>
+    <label><b>Location Type:</b></label><br>
+    <select name="location">
+        <option>Select a Type</option>
+        <option>Hill Station</option>
+        <option>Beach</option>
+        <option>Desert</option>
+        <option>City Tour</option>
+        <option>Wildlife Safari</option>
+    </select>
+    <br><br>
+
+    <label><b>Extra Suggestions:</b></label><br>
+    <textarea name="suggestions" rows="3" cols="30"></textarea><br><br>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
+</body>
+</html>
+
+Slip 13
+1.	Design HTML 5 Page Using CSS which display the following Box ( use Box Model Property in CSS).
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Box Model Example</title>
+    <style>
+        .outer-box {
+            width: 300px;
+            height: 300px;
+            background-color: #f28c28; /* Orange */
+            border: 4px solid black;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .inner-box {
+            width: 90%;
+            height: 90%;
+            background-color: yellow;
+            border: 3px solid black;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .label {
+            background-color: lightyellow;
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 25px;
+            width: fit-content;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align:center;">Box Model Example (CSS)</h2>
+<div class="outer-box">
+    <div class="inner-box">
+        <div class="label">M.Sc (Computer Sci)</div>
+        <div class="label">Academic Year<br>2023–24</div>
+    </div>
+</div>
+</body>
+</html>
+
+Slip 14
+1.	Write a css3 script for the student registration form with appropriate message display also highlight compulsory fields in a different color.
+Solution: <!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration</title>
+<style>
+    body{
+        font-family: Arial;
+        padding: 20px;
+    }
+    .form-box{
+        width: 350px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    input, select{
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid #888;
+        border-radius: 4px;
+    }
+    /* Highlight compulsory fields */
+    input:required, select:required{
+        border-color: red;
+        background: #ffe6e6;
+    }
+    /* Message on focus */
+    input:focus::after {
+        content: "Please fill this field";
+        color: green;
+        font-size: 12px;
+    }
+    label{
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="form-box">
+    <h3>Student Registration</h3>
+    <form>
+        <label>Name *</label>
+        <input type="text" required>
+        <label>Age *</label>
+        <input type="number" required>
+        <label>Email *</label>
+        <input type="email" required>
+        <label>Course</label>
+        <select required>
+            <option>Select Course</option>
+            <option>BCA</option>
+            <option>BSc IT</option>
+            <option>MCA</option>
+        </select>
+        <input type="submit" value="Register">
+    </form>
+</div>
+</body>
+</html>
+
+
+
+Slip 15
+1.	Create HTML web-page using Bootstrap as shown below.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-box {
+            width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            background: #f2f2f2;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        .btn-submit {
+            background: orange;
+            color: #fff;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-box">
+    <h3 class="text-center mb-4">Registration Form</h3>
+    <form>
+        <div class="mb-3">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="First Name">
+        </div>
+        <div class="mb-3">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name">
+        </div>
+        <div class="mb-3">
+            <label>Department / Office</label>
+            <select class="form-control">
+                <option>Select your Department/Office</option>
+                <option>HR</option>
+                <option>Finance</option>
+                <option>IT</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" class="form-control" placeholder="Username">
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="mb-3">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Confirm Password">
+        </div>
+        <div class="mb-3">
+            <label>E-Mail</label>
+            <input type="email" class="form-control" placeholder="E-Mail Address">
+        </div>
+        <div class="mb-3">
+            <label>Contact No.</label>
+            <input type="tel" class="form-control" placeholder="(639)">
+        </div>
+        <button type="submit" class="btn btn-submit">SUBMIT</button>
+    </form>
+</div>
+</body>
+</html>
+
+
+
+Slip 16
+1.	Create a web page to create 3D text. Apply all text effects like text shadow, text overflow, wordwrap etc.
+Solution: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>3D Text & Text Effects</title>
+<style>
+  body{
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    display:flex;
+    gap:2rem;
+    align-items:flex-start;
+    justify-content:center;
+    padding:3rem;
+    background:#0f172a;
+    color:#fff;
+  }
+
+  /* Container card */
+  .card{
+    width:380px;
+    background:#0b1220;
+    padding:18px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(2,6,23,.6);
+  }
+
+  /* 3D/extruded text (stacked shadows) */
+  .three-d{
+    font-size:56px;
+    font-weight:900;
+    line-height:1;
+    letter-spacing:1px;
+    display:inline-block;
+    margin-bottom:12px;
+    color:#fff;
+    /* many shadows -> extrusion */
+    text-shadow:
+      1px 1px 0 #d1d5db,
+      2px 2px 0 #cbd5e1,
+      3px 3px 0 #b8c4d6,
+      4px 4px 0 #98a8bd,
+      5px 5px 0 #7b8aa0,
+      6px 6px 8px rgba(2,6,23,.6);
+    background: linear-gradient(180deg,#ffd54d 0%, #ff7a59 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateZ(0); /* GPU layer for smoothness */
+  }
+
+  /* subtle glow */
+  .glow{
+    text-shadow:
+      0 2px 0 rgba(255,255,255,.06),
+      0 6px 20px rgba(255,122,89,.16);
+  }
+
+  /* Single-line truncation with ellipsis */
+  .single-line{
+    width:100%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    border:1px dashed rgba(255,255,255,.08);
+    padding:.5rem;
+    margin-top:.75rem;
+    font-size:14px;
+    color:#d1d5db;
+  }
+
+  /* Multiline with wrapping and break long words */
+  .multi-line{
+    margin-top:.8rem;
+    max-height:6.2rem;
+    overflow:auto;
+    line-height:1.4;
+    padding:.5rem;
+    border:1px dashed rgba(255,255,255,.08);
+    font-size:14px;
+    color:#d1d5db;
+    /* permit breaking of long words */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  /* demo: extremely long word to force a break */
+  .longword{ font-weight:700; color:#ffd54d; }
+
+  /* small interactions */
+  .three-d:hover{ transform:translateY(-4px); transition:transform .18s ease; cursor:default; }
+</style>
+</head>
+<body>
+<div class="card" aria-label="3D text demo">
+  <div class="three-d glow" role="heading" aria-level="1">3D TEXT</div>
+  <div class="single-line" title="This shows text-overflow with ellipsis">
+    This is an example of a very long single-line sentence that will be truncated with an ellipsis if it overflows the container.
+  </div>
+ <div class="multi-line" aria-live="polite">
+    This paragraph demonstrates <strong>word-wrap</strong> and <strong>overflow-wrap</strong>. If a user pastes a verylongwordwithoutanyspacesitwillbreakbecause CSS rules allow it to wrap. Example: 
+    <span class="longword">SupercalifragilisticexpialidociousSupercalifragilistic</span>
+  </div>
+</div>
+</body>
+</html>
+Slip 17
+1.	Create an html page named as “calendar.html” Use necessary input types and get following output.
+Solution: <!DOCTYPE html>
+<html>
+<head>
+    <title>Input Types Examples</title>
+</head>
+<body>
+    <h2>Input Types Examples</h2>
+    <form>
+        Date: <input type="date"><br><br>
+        Datetime: <input type="datetime"><br><br>
+        Datetime-local: <input type="datetime-local"><br><br>
+        Month: <input type="month"><br><br>
+        Time: <input type="time"><br><br>
+        Week: <input type="week"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
