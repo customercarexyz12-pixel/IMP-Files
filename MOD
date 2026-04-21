@@ -1,1 +1,1047 @@
+Slip 1
+
+Q.1)	Create an HTML form for Login and write a JavaScript to validate email ID and Password using Regular Expression.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form Validation</title>
+    <script>
+        function validateForm() {
+
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Regular Expression for Email
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Regular Expression for Password
+            var passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+            // Email Validation
+            if (!emailPattern.test(email)) {
+                alert("Invalid Email ID");
+                return false;
+            }
+            // Password Validation
+            if (!passPattern.test(password)) {
+                alert("Password must be 8+ chars with Uppercase, Lowercase, Number & Special Symbol");
+                return false;
+            }
+            alert("Login Successful!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Login Form</h2>
+    <form onsubmit="return validateForm()">
+        Email: <br>
+        <input type="text" id="email" required><br><br>
+        Password: <br>
+        <input type="password" id="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+
+Q2.Create an HTML form that contain the Student Registration details and write a JavaScript to validate Student first and last name as it should not contain other than alphabets and age should be between 18 to 50.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <script>
+        function validateForm() {
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var age = document.getElementById("age").value;
+            // Regex for alphabets only
+            var namePattern = /^[A-Za-z]+$/;
+            // First Name Validation
+            if (!namePattern.test(fname)) {
+                alert("First name must contain only alphabets");
+                return false;
+            }
+            // Last Name Validation
+            if (!namePattern.test(lname)) {
+                alert("Last name must contain only alphabets");
+                return false;
+            }
+            // Age Validation
+            if (age < 18 || age > 50) {
+                alert("Age must be between 18 and 50");
+                return false;
+            }
+            alert("Registration Successful!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+<h2>Student Registration Form</h2>
+<form onsubmit="return validateForm()">
+    First Name:<br>
+    <input type="text" id="fname" required><br><br>
+    Last Name:<br>
+    <input type="text" id="lname" required><br><br>
+    Age:<br>
+    <input type="number" id="age" required><br><br>
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>
+Slip 2
+ Q1. Create a Node.js file that will convert the output "Full Stack!" into reverse string.
+// Original string
+let str = "Full Stack!";
+
+// Reverse string
+let reversed = str.split("").reverse().join("");
+
+// Display output
+console.log("Reversed String:", reversed);
+
+Q2. Using node js create a web page to read two file names from user and append contents of first file into second file
+Step1.
+npm init -y
+npm install express
+
+const express = require("express");
+const fs = require("fs");
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
+// Show HTML Form
+app.get("/", (req, res) => {
+    res.send(`
+        <h2>Append File Content</h2>
+        <form method="POST" action="/append">
+            First File Name: <input type="text" name="file1"><br><br>
+            Second File Name: <input type="text" name="file2"><br><br>
+            <button type="submit">Append</button>
+        </form>
+    `);
+});
+
+// Append File Content
+app.post("/append", (req, res) => {
+    const file1 = req.body.file1;
+    const file2 = req.body.file2;
+
+    fs.readFile(file1, "utf8", (err, data) => {
+        if (err) return res.send("Error reading first file");
+
+        fs.appendFile(file2, data, (err) => {
+            if (err) return res.send("Error appending to second file");
+
+            res.send("Content appended successfully!");
+        });
+    });
+});
+
+app.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});
+
+Slip 3
+Q1.Fetch the details using ng-repeat in AngularJS.
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>ng-repeat Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <h2>Student Details</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Marks</th>
+        </tr>
+
+        <tr ng-repeat="s in students">
+            <td>{{s.name}}</td>
+            <td>{{s.city}}</td>
+            <td>{{s.marks}}</td>
+        </tr>
+    </table>
+
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+    $scope.students = [
+        {name:"Rahul", city:"Pune", marks:80},
+        {name:"Priya", city:"Mumbai", marks:85},
+        {name:"Amit", city:"Nashik", marks:78}
+    ];
+});
+</script>
+</body>
+</html>
+
+Q.1)	Create a node.js file that Select all records from the "Teacher" table, and find the Teachers whose salary is greater than 20,000.
+Step 1; npm install mysql
+const mysql = require("mysql");
+// Create connection
+const con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "college"
+});
+// Connect to DB
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected to MySQL");
+    // Query to select teachers with salary > 20000
+    const sql = "SELECT * FROM Teacher WHERE salary > 20000";
+    con.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("Teachers with salary > 20000:");
+        console.log(result);
+    });
+});
+Slip 4.
+Q1. Create a Simple Web Server using node js.
+const http = require("http");
+
+// Create server
+const server = http.createServer((req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write("<h1>Welcome to Node.js Web Server</h1>");
+    res.end();
+});
+
+// Run server on port 3000
+server.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});
+
+Q2. Create an HTML form using AngularJS that contain the Student Registration details and validate Student first and last name as it should not contain other than alphabets and age should be between 18 to 50 and display greeting message depending on current time using ng-show (e.g. Good Morning, Good Afternoon, etc.) (Use AJAX).
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Student Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>Student Registration Form</h2>
+<!-- Greeting Message using ng-show -->
+<h3 ng-show="hour < 12">Good Morning </h3>
+<h3 ng-show="hour >= 12 && hour < 17">Good Afternoon </h3>
+<h3 ng-show="hour >= 17">Good Evening </h3>
+<form name="regForm" ng-submit="submitForm()">
+    First Name:
+    <input type="text" ng-model="student.fname" ng-pattern="/^[A-Za-z]+$/" required>
+    <span ng-show="regForm.$submitted && regForm.fname.$error.pattern">
+        Only alphabets allowed
+    </span>
+    <br><br>
+    Last Name:
+    <input type="text" ng-model="student.lname" ng-pattern="/^[A-Za-z]+$/" required>
+    <span ng-show="regForm.$submitted && regForm.lname.$error.pattern">
+        Only alphabets allowed
+    </span>
+    <br><br>
+    Age:
+    <input type="number" ng-model="student.age" min="18" max="50" required>
+    <span ng-show="regForm.$submitted && regForm.age.$invalid">
+        Age must be between 18–50
+    </span>
+    <br><br>
+    <button type="submit">Register</button>
+</form>
+<h3>{{message}}</h3>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope, $http) {
+    // Greeting Time
+    $scope.hour = new Date().getHours();
+    // AJAX Example (fetch sample JSON)
+    $http.get("https://jsonplaceholder.typicode.com/users")
+        .then(function(response){
+            console.log("Data fetched using AJAX:", response.data);
+        });
+    // Form Submit
+    $scope.submitForm = function() {
+        $scope.message = "Registration Successful!";
+    };
+});
+</script>
+</body>
+</html>
+
+Slip 5
+Q1. Create a Node.js file that writes an HTML form, with an upload field.
+npm install formidable
+const http = require("http");
+http.createServer(function (req, res) {
+    // Show HTML Upload Form
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(`
+        <h2>File Upload Form</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            Select file:
+            <input type="file" name="fileupload"><br><br>
+            <input type="submit" value="Upload">
+        </form>
+    `);
+    res.end();
+}).listen(3000);
+console.log("Server running at http://localhost:3000");
+
+
+Q2)Using angular js create a SPA to carry out validation for a username entered in a textbox. If the textbox is blank, alert “Enter username”. If the number of characters is less than three, alert ‟ Username is too short”. If value entered is appropriate the print “Valid username” and password should be minimum 8 characters.
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Username Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>User Validation</h2>
+Username:
+<input type="text" ng-model="username"><br><br>
+Password:
+<input type="password" ng-model="password"><br><br>
+<button ng-click="validate()">Validate</button>
+<h3>{{message}}</h3>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope){
+    $scope.validate = function(){
+
+        if(!$scope.username){
+            alert("Enter username");
+        }
+        else if($scope.username.length < 3){
+            alert("Username is too short");
+        }
+        else if(!$scope.password || $scope.password.length < 8){
+            alert("Password must be minimum 8 characters");
+        }
+        else{
+            $scope.message = "Valid username";
+        }
+    }
+});
+</script>
+</body>
+</html>
+
+Slip 6
+Q.1)	Write angular JS by using ng-click directive to display an alert message after clicking the element.
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>ng-click Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>Click Button to Show Alert</h2>
+<button ng-click="showMsg()">Click Me</button>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope){
+    $scope.showMsg = function(){
+        alert("Button Clicked!");
+    }
+});
+</script>
+</body>
+</html>
+Q.2)Create a Node.js file that opens the requested file and returns the content to the client. If anything goes wrong, throw a 404 error.
+const http = require("http");
+const fs = require("fs");
+http.createServer((req, res) => {
+    // Requested file name from URL
+    let filename = "." + req.url;
+    // Read file
+    fs.readFile(filename, (err, data) => {
+        if (err) {
+            // 404 Error
+            res.writeHead(404, {"Content-Type": "text/html"});
+            return res.end("<h1>404 File Not Found</h1>");
+        }
+        // Send file content
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write(data);
+        res.end();
+    });
+}).listen(3000);
+console.log("Server running at http://localhost:3000");
+Slip 7
+Q1. Create angular JS Application that show the current Date and Time of the System (Use Interval Service)
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Date Time App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>Current Date & Time</h2>
+<h3>{{currentTime}}</h3>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope, $interval){
+    // Update time every second
+    $interval(function(){
+        $scope.currentTime = new Date().toLocaleString();
+    }, 1000);
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+Slip 8
+Q.1)	Using angular js display the 10 student details in Table format (using ng-repeat directive use Array to store data).
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Student Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>Student Details</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Marks</th>
+    </tr>
+    <tr ng-repeat="s in students">
+        <td>{{s.id}}</td>
+        <td>{{s.name}}</td>
+        <td>{{s.city}}</td>
+        <td>{{s.marks}}</td>
+    </tr>
+</table>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope){
+    $scope.students = [
+        {id:1, name:"Rahul", city:"Pune", marks:80},
+        {id:2, name:"Priya", city:"Mumbai", marks:85},
+        {id:3, name:"Amit", city:"Nashik", marks:78},
+        {id:4, name:"Sneha", city:"Nagpur", marks:88},
+        {id:5, name:"Rohan", city:"Thane", marks:76},
+        {id:6, name:"Pooja", city:"Solapur", marks:82},
+        {id:7, name:"Kiran", city:"Kolhapur", marks:79},
+        {id:8, name:"Neha", city:"Satara", marks:90},
+        {id:9, name:"Vikas", city:"Aurangabad", marks:75},
+        {id:10, name:"Anita", city:"Latur", marks:84}
+    ];
+});
+</script>
+</body>
+</html>
+Slip 9
+Q.1) Create a Node.js file that writes an HTML form, with a concatenate two string.
+const http = require("http");
+const url = require("url");
+http.createServer((req, res) => {
+  // When form is submitted
+  if (req.url.includes("/result")) {
+    const q = url.parse(req.url, true).query;
+    res.end("<h2>Result: " + q.a + q.b + "</h2>");
+  } 
+  else {
+    // HTML Form
+    res.writeHead(200, {"Content-Type": "text/html"});
+    res.end(`
+      <h3>Concatenate Strings</h3>
+      <form action="/result">
+        String 1: <input name="a"><br><br>
+        String 2: <input name="b"><br><br>
+        <button>Submit</button>
+      </form>
+    `);
+  }
+}).listen(3000);
+console.log("Server running at http://localhost:3000");
+
+Q.2)	create a Node.js file that opens the requested file and returns the content to the client If anything goes wrong, throw a 404 error.
+const http = require("http");
+const fs = require("fs");
+
+http.createServer((req, res) => {
+  let fileName = "." + req.url;   // get requested file
+
+  fs.readFile(fileName, (err, data) => {
+    if (err) {
+      // 404 Error
+      res.writeHead(404, {"Content-Type": "text/html"});
+      res.end("<h2>404 File Not Found</h2>");
+    } else {
+      // Send file content
+      res.writeHead(200, {"Content-Type": "text/html"});
+      res.end(data);
+    }
+  });
+}).
+listen(3000);
+console.log("Server running at http://localhost:3000");
+
+Slip 11.
+Q.1) Find a company with a workforce greater than 30 in the array. used find by id method.
+// Array of companies
+const companies = [
+  {id:1, name:"TCS", workforce:25},
+  {id:2, name:"Infosys", workforce:50},
+  {id:3, name:"Wipro", workforce:18},
+  {id:4, name:"Google", workforce:100}
+];
+// Find company with workforce > 30
+const result = companies.find(c => c.workforce > 30);
+console.log(result);
+
+
+
+Q2) Create a node.js file that Select all records from the "Teacher" table, and find the Teachers whose salary is greater than 20,000.
+npm install mysql
+const mysql = require("mysql");
+// DB connection
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "college"
+});
+con.connect(err => {
+  if (err) throw err;
+  // SQL query
+  const sql = "SELECT * FROM Teacher WHERE salary > 20000";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+Slip 12
+Q.1)	Create Angular application that print the name of students who got 85% using filter and map
+Method.
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Filter & Map</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<h2>Students with 85% Marks</h2>
+<ul>
+    <li ng-repeat="name in topperNames">{{name}}</li>
+</ul>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope){
+    // Student array
+    const students = [
+        {name:"Rahul", marks:80},
+        {name:"Priya", marks:85},
+        {name:"Amit", marks:78},
+        {name:"Sneha", marks:85},
+        {name:"Rohan", marks:90}
+    ];
+    // filter + map
+    $scope.topperNames = students
+        .filter(s => s.marks == 85)
+        .map(s => s.name);
+});
+</script>
+</body>
+</html>
+
+
+Q.2)Create an HTML form for Student Feedback Form with Name, Email ID, Mobile No., feedback (Not good, good, very good, excellent) and write a JavaScript to validate all field using Regular Expression.
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Feedback Form</title>
+<script>
+function validateForm() {
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var mobile = document.getElementById("mobile").value;
+  var feedback = document.getElementById("feedback").value;
+  // Regex Patterns
+  var namePattern = /^[A-Za-z ]+$/;
+  var emailPattern = /^\S+@\S+\.\S+$/;
+  var mobilePattern = /^[0-9]{10}$/;
+  if(!namePattern.test(name)){
+    alert("Enter valid name");
+    return false;
+  }
+  if(!emailPattern.test(email)){
+    alert("Enter valid email");
+    return false;
+  }
+
+  if(!mobilePattern.test(mobile)){
+    alert("Enter 10 digit mobile number");
+    return false;
+  }
+  if(feedback == ""){
+    alert("Please select feedback");
+    return false;
+  }
+  alert("Feedback Submitted Successfully!");
+  return true;
+}
+</script>
+</head>
+<body>
+<h2>Student Feedback Form</h2>
+<form onsubmit="return validateForm()">
+Name: <br>
+<input type="text" id="name" required><br><br>
+Email ID: <br>
+<input type="text" id="email" required><br><br>
+Mobile No: <br>
+<input type="text" id="mobile" required><br><br>
+Feedback: <br>
+<select id="feedback">
+  <option value="">Select</option>
+  <option>Not good</option>
+  <option>Good</option>
+  <option>Very good</option>
+  <option>Excellent</option>
+</select><br><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+
+
+Slip 13
+Q.1) Create a Node.js file that will convert the output "HELLO WORLD!" into lower-case letters.
+// Original text
+let text = "HELLO WORLD!";
+// Convert to lowercase
+let result = text.toLowerCase();
+// Display output
+console.log(result);
+Slip 14
+Q.2)Create an HTML form that contain the Employee Registration details and write a JavaScript to validate DOB, Joining Date, and Salary.
+<!DOCTYPE html>
+<html>
+<head>
+<title>Employee Registration</title>
+<script>
+function validateForm() {
+  var dob = new Date(document.getElementById("dob").value);
+  var join = new Date(document.getElementById("join").value);
+  var salary = document.getElementById("salary").value;
+  var today = new Date();
+  // DOB Validation (past date)
+  if(dob >= today){
+    alert("DOB must be in the past");
+    return false;
+  }
+  // Joining Date Validation
+  if(join <= dob){
+    alert("Joining date must be after DOB");
+    return false;
+  }
+  // Salary Validation
+  if(salary <= 0){
+    alert("Salary must be positive");
+    return false;
+  }
+  alert("Employee Registered Successfully!");
+  return true;
+}
+</script>
+</head>
+<body>
+<h2>Employee Registration Form</h2>
+<form onsubmit="return validateForm()">
+Name:<br>
+<input type="text" required><br><br>
+Date of Birth:<br>
+<input type="date" id="dob" required><br><br>
+Joining Date:<br>
+<input type="date" id="join" required><br><br>
+Salary:<br>
+<input type="number" id="salary" required><br><br>
+<input type="submit" value="Register">
+</form>
+</body>
+</html>
+Slip 15
+Q.1)	Create Angular application that print the name of students who play basketball using filter and map method
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Basketball Players</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            // Student data
+            $scope.students = [
+                {name: "Rahul", sport: "cricket"},
+                {name: "Amit", sport: "basketball"},
+                {name: "Priya", sport: "basketball"},
+                {name: "Neha", sport: "tennis"}
+            ];
+            // Filter + Map
+            $scope.getBasketballPlayers = function() {
+                return $scope.students
+                    .filter(s => s.sport === "basketball") // filter
+                    .map(s => s.name);                     // map
+            };
+    });
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <h2>Students who play Basketball</h2>
+    <ul>
+        <li ng-repeat="name in getBasketballPlayers()">
+            {{name}}
+        </li>
+    </ul>
+</body>
+</html>
+Q2.Create an HTML form for Employee and write a JavaScript to validate name, email ID, mobile number, department, joining date using Regular Expression.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Registration</title>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var dept = document.getElementById("dept").value;
+            var date = document.getElementById("date").value;
+
+            // Regex patterns
+            var namePattern = /^[A-Za-z ]+$/;
+            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/;
+            var mobilePattern = /^[0-9]{10}$/;
+            var deptPattern = /^[A-Za-z ]+$/;
+            var datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+            if (!namePattern.test(name)) {
+                alert("Enter valid name (alphabets only)");
+                return false;
+            }
+            if (!emailPattern.test(email)) {
+                alert("Enter valid email");
+                return false;
+            }
+            if (!mobilePattern.test(mobile)) {
+                alert("Enter valid 10-digit mobile number");
+                return false;
+            }
+            if (!deptPattern.test(dept)) {
+                alert("Enter valid department");
+                return false;
+            }
+            if (!datePattern.test(date)) {
+                alert("Enter valid date (YYYY-MM-DD)");
+                return false;
+            }
+            alert("Form Submitted Successfully");
+            return true;
+        }
+    </script>
+</head>
+<body>
+<h2>Employee Registration Form</h2>
+<form onsubmit="return validateForm()">
+    Name:<br>
+    <input type="text" id="name" required><br><br>
+    Email:<br>
+    <input type="text" id="email" required><br><br>
+    Mobile:<br>
+    <input type="text" id="mobile" required><br><br>
+    Department:<br>
+    <input type="text" id="dept" required><br><br>
+    Joining Date:<br>
+    <input type="date" id="date" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+Slip 16
+Q.1)	Create Angular application that print the name of students who play cricket using filter and
+map method
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Cricket Players</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+
+            // Student data
+            $scope.students = [
+                {name: "Rahul", sport: "cricket"},
+                {name: "Amit", sport: "football"},
+                {name: "Priya", sport: "cricket"},
+                {name: "Neha", sport: "tennis"}
+            ];
+            // Filter + Map
+            $scope.getCricketPlayers = function() {
+                return $scope.students
+                    .filter(s => s.sport === "cricket") // filter
+                    .map(s => s.name);                  // map
+            };
+        });
+    </script>
+</head>
+<body ng-controller="myCtrl">
+
+    <h2>Students who play Cricket</h2>
+    <ul>
+        <li ng-repeat="name in getCricketPlayers()">
+            {{name}}
+        </li>
+    </ul>
+</body>
+</html>
+Slip 17
+Q.1)	Using angular js Create a SPA that show Syllabus content of all subjects of M.Sc (CS) Sem-II (use ng-view)
+ <!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>M.Sc CS Sem-II Syllabus</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- AngularJS Route CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+            .when("/subject1", {
+                template: "<h3>Data Structures</h3><p>Trees, Graphs, Sorting</p>"
+            })
+            .when("/subject2", {
+                template: "<h3>Database Management</h3><p>SQL, Normalization</p>"
+            })
+            .when("/subject3", {
+                template: "<h3>Operating System</h3><p>Processes, Memory Management</p>"
+            })
+            .otherwise({
+                template: "<h3>Welcome to M.Sc CS Sem-II Syllabus</h3>"
+            });
+        });
+    </script>
+</head>
+<body>
+<h2>M.Sc (CS) Sem-II Syllabus</h2>
+<!-- Navigation Links -->
+<a href="#!/subject1">Data Structures</a> |
+<a href="#!/subject2">DBMS</a> |
+<a href="#!/subject3">OS</a>
+<hr>
+<!-- View -->
+<div ng-view></div>
+</body>
+</html>
+Q2. Q.2)	Using angular js create a SPA to carry out validation for a username entered in a textbox. If the textbox is blank, alert “Enter username”. If the number of characters is less than three, alert ‟ Username is too short”. If value entered is appropriate the print “Valid username” and password should be minimum 8 characters
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>AngularJS Validation</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            $scope.check = function() {
+                if (!$scope.username) {
+                    alert("Enter username");
+                }
+                else if ($scope.username.length < 3) {
+                    alert("Username is too short");
+                }
+                else if (!$scope.password || $scope.password.length < 8) {
+                    alert("Password must be minimum 8 characters");
+                }
+                else {
+                    alert("Valid username");
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <h2>Login Form</h2>
+    Username:<br>
+    <input type="text" ng-model="username"><br><br>
+    Password:<br>
+    <input type="password" ng-model="password"><br><br>
+    <button ng-click="check()">Submit</button>
+</body>
+</html>
+Q.1)	Develop an Express.js application that defines routes for Create operations on a resource (Movie).
+
+Open terminal and install = npm init -y
+npm install express
+
+const express = require('express');
+const app = express();
+
+// Middleware to read JSON data
+app.use(express.json());
+
+// Dummy array to store movies
+let movies = [];
+
+// CREATE operation (POST)
+app.post('/movies', (req, res) => {
+    const movie = req.body;
+
+    movies.push(movie);
+
+    res.send("Movie added successfully");
+});
+
+// Start server
+app.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});
+
+Slip 22
+Q.1)	Using node js create an Employee Registration Form validation.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+<h2>Employee Registration</h2>
+<form action="http://localhost:3000/submit" method="GET">
+    Name:<br>
+    <input type="text" name="name" required><br><br>
+    Email:<br>
+    <input type="text" name="email" required><br><br>
+    Mobile:<br>
+    <input type="text" name="mobile" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+Q2.Create Angular application that print the name of students who got 85% using filter and map method
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Students with 85%</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            // Student data
+            $scope.students = [
+                {name: "Rahul", marks: 85},
+                {name: "Amit", marks: 70},
+                {name: "Priya", marks: 85},
+                {name: "Neha", marks: 90}
+            ];
+            // Filter + Map
+            $scope.getStudents = function() {
+                return $scope.students
+                    .filter(s => s.marks == 85) // filter
+                    .map(s => s.name);         // map
+            };
+        });
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <h2>Students who got 85%</h2>
+    <ul>
+        <li ng-repeat="name in getStudents()">
+            {{name}}
+        </li>
+    </ul>
+</body>
+</html>
+Slip 23
+Q.1)	Write an AngularJS script to print details of Employee (employee name, employee Id, address etc.) in tabular form using ng-repeat
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Employee Details</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            // Employee data
+            $scope.employees = [
+                {id: 1, name: "Rahul", address: "Pune"},
+                {id: 2, name: "Amit", address: "Mumbai"},
+                {id: 3, name: "Priya", address: "Nashik"}
+            ];
+        });
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <h2>Employee Details</h2>
+    <table border="1">
+        <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+        <tr ng-repeat="emp in employees">
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.address}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+Slip 25
+Q.1) Create a Node.js application that reads data from multiple files asynchronously using
+promises and async/await.
+Create 3 files:
+•	file1.txt 
+•	file2.txt 
+•	file3.txt
+const fs = require("fs").promises;
+async function readAllFiles() {
+  try {
+    // Read files asynchronously
+    const data1 = await fs.readFile("file1.txt", "utf8");
+    const data2 = await fs.readFile("file2.txt", "utf8");
+    const data3 = await fs.readFile("file3.txt", "utf8");
+    console.log("File 1:", data1);
+    console.log("File 2:", data2);
+    console.log("File 3:", data3);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+readAllFiles();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
