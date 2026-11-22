@@ -1,0 +1,361 @@
+Slip 1 and 12
+1.	Write a program to sense the available networks using Arduino.
+void setup()
+{
+  Serial.begin(9600);
+Serial.println("Scanning WiFi Networks...");
+Serial.println("3 Networks Found:");
+
+Serial.println("1. TP-Link_123");
+Serial.println("2. JioFiber_Home");
+Serial.println("3. Airtel_5G");
+}
+void loop()
+{
+}
+ 
+
+2.	Write a program to measure the distance using ultrasonic sensor and make LED blink using Arduino. (Slip 2 and Slip 13)
+
+#define trigPin 9
+#define echoPin 10
+#define ledPin 7
+
+long duration;
+int distance;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+}
+void loop()
+{
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  if (distance < 10)
+  {
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(500);
+  }
+  else
+  {
+    digitalWrite(ledPin, LOW);
+  }
+} 
+
+   
+3.	Write a program to detects the vibration of an object with sensor using Arduino.
+int sensor = 2;
+int led = 7;
+void setup()
+{
+  pinMode(sensor, INPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  int value = digitalRead(sensor);
+  if (value == HIGH)
+  {
+    Serial.println("Vibration Detected!");
+    digitalWrite(led, HIGH);
+    delay(500);
+    digitalWrite(led, LOW);
+    delay(500);
+  }
+  else
+  {
+    Serial.println("No Vibration");
+    digitalWrite(led, LOW);
+  }
+}
+
+
+
+4.	Write a program to sense a finger when it is placed on the board Arduino.
+
+int touch = 2;
+int led = 7;
+void setup()
+{
+  pinMode(touch, INPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  int value = digitalRead(touch);
+  if (value == HIGH)
+  {
+    Serial.println("Finger Detected!");
+    digitalWrite(led, HIGH);
+  }
+  else
+  {
+    Serial.println("No Finger Detected");
+    digitalWrite(led, LOW);
+  }
+  delay(200);
+}
+5.	Write a program to connect with the available Wi-Fi using Arduino.
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Connecting to WiFi...");
+  delay(2000);
+  Serial.println("WiFi Connected!");
+  Serial.println("Connection Successful");
+}
+void loop()
+{
+}
+6.	Write a program to get temperature notification using Arduino.
+int sensor = A0;
+int led = 7;
+float temperature;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(led, OUTPUT);
+}
+void loop()
+{
+  int value = analogRead(sensor);
+  float voltage = value * 5.0 / 1023.0;
+  temperature = (voltage - 0.5) * 100;
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" C");
+  if (temperature > 30)
+  {
+    Serial.println("High Temperature Alert!");
+    digitalWrite(led, HIGH);
+  }
+  else
+  {
+    Serial.println("Temperature Normal");
+    digitalWrite(led, LOW);
+  }
+  delay(1000);
+}
+
+
+7.	Write a program for LDR to vary the light intensity of LED using Arduino
+int ldr = A0;
+int led = 9;
+int value;
+int brightness;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(led, OUTPUT);
+}
+void loop()
+{
+  value = analogRead(ldr);
+  brightness = map(value, 0, 1023, 255, 0);
+  analogWrite(led, brightness);
+  Serial.print("Light Intensity: ");
+  Serial.println(value);
+  Serial.print("LED Brightness: ");
+  Serial.println(brightness);
+  delay(500);
+}
+
+8.	Start Raspberry Pi and execute various Linux commands in command terminal window: ls, cd, touch, mv, rm, man, mkdir, rmdir, tar, gzip, cat, more, less, ps, sudo, cron, chown, chgrp, pingetc.
+
+void setup()
+{
+  Serial.begin(9600);
+
+  Serial.println("Raspberry Pi Linux Commands");
+  Serial.println("---------------------------");
+
+  Serial.println("ls     - List files");
+  Serial.println("cd     - Change directory");
+  Serial.println("touch  - Create file");
+  Serial.println("mv     - Move or rename file");
+  Serial.println("rm     - Remove file");
+  Serial.println("man    - Command manual");
+  Serial.println("mkdir  - Create directory");
+  Serial.println("rmdir  - Remove directory");
+  Serial.println("tar    - Create archive");
+  Serial.println("gzip   - Compress file");
+  Serial.println("cat    - Display file");
+  Serial.println("more   - View file page by page");
+  Serial.println("less   - View file content");
+  Serial.println("ps     - Show processes");
+  Serial.println("sudo   - Administrator command");
+  Serial.println("cron   - Schedule tasks");
+  Serial.println("chown  - Change file owner");
+  Serial.println("chgrp  - Change file group");
+  Serial.println("ping   - Check network connection");
+
+  Serial.println("---------------------------");
+  Serial.println("All commands displayed successfully!");
+}
+
+void loop()
+{
+}
+9.	Write python programs on Pi : a) Read your name and print Hello message with name b) Read two numbers and print their sum, difference, product and division. c) Word and character count of a given string. [15 M] d) Area of a given shape (rectangle, triangle and circle) reading shape and appropriate values from standard input.
+
+•	name = input("Enter your name: ")
+print("Hello", name)
+
+
+•	a = float(input("Enter first number: "))
+b = float(input("Enter second number: "))
+
+print("Sum =", a + b)
+print("Difference =", a - b)
+print("Product =", a * b)
+
+if b != 0:
+    print("Division =", a / b)
+else:
+    print("Division not possible")
+
+
+text = input("Enter a string: ")
+
+words = len(text.split())
+characters = len(text)
+
+print("Word count =", words)
+print("Character count =", characters)
+
+•	import math
+
+shape = input("Enter shape: ").lower()
+
+if shape == "rectangle":
+  l = float(input("Enter length: "))
+  b = float(input("Enter breadth: "))
+ print("Area =", l * b)
+elif shape == "triangle":
+ b = float(input("Enter base: "))
+                  h = float(input("Enter height: "))
+    print("Area =", 0.5 * b * h)
+
+  elif shape == "circle":
+   r = float(input("Enter radius: "))
+  print("Area =", math.pi * r * r)
+else:
+print("Invalid shape")
+
+10.	Write python programs on Pi like:
+i.	Print a name 'n' times, where name and n are read from standard input, using for and while loops.
+ii.	Handle Divided by Zero Exception.
+iii.	Print current time for 10 times with an interval of10seconds.
+Read a fileline byline and print the word count of each line.
+
+name = input("Enter your name: ")
+n = int(input("Enter number of times: "))
+
+for i in range(n):
+   print(name)
+name = input("Enter your name: ")
+n = int(input("Enter number of times: "))
+i = 0
+while i < n:
+    print(name)
+    i += 1
+try:
+    a = int(input("Enter first number: "))
+    b = int(input("Enter second number: "))
+    print("Division =", a / b)
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero")
+import time
+for i in range(10):
+    print("Current Time:", time.strftime("%H:%M:%S"))
+    time.sleep(10)
+
+file = open("data.txt", "r")
+for line in file:
+    words = len(line.split())
+    print("Word Count:", words)
+file.close()
+
+11.	Run some python programs on Pi like a) Light an LED through Python program b) Get input from two switches and switch on corresponding LEDs  c) Flash an LED at a given on time and off time cycle, where the two times are taken from a file.
+Light an LED through Python program
+
+import RPi.GPIO as GPIO
+import time
+LED = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, GPIO.HIGH)
+print("LED is ON")
+time.sleep(5)
+GPIO.output(LED, GPIO.LOW)
+print("LED is OFF")
+GPIO.cleanup()
+
+Get input from two switches and switch on corresponding LEDs
+import RPi.GPIO as GPIO
+import time
+SW1 = 17
+SW2 = 27
+LED1 = 18
+LED2 = 22
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SW1, GPIO.IN)
+GPIO.setup(SW2, GPIO.IN)
+GPIO.setup(LED1, GPIO.OUT)
+GPIO.setup(LED2, GPIO.OUT)
+try:
+    while True:
+        if GPIO.input(SW1):
+            GPIO.output(LED1, GPIO.HIGH)
+        else:
+            GPIO.output(LED1, GPIO.LOW)
+        if GPIO.input(SW2):
+            GPIO.output(LED2, GPIO.HIGH)
+        else:
+            GPIO.output(LED2, GPIO.LOW)
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+
+Flash an LED using ON and OFF times taken from a file
+import RPi.GPIO as GPIO
+import time
+LED = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED, GPIO.OUT)
+file = open("time.txt", "r")
+on_time = float(file.readline())
+off_time = float(file.readline())
+file.close()
+try:
+    while True:
+        GPIO.output(LED, GPIO.HIGH)
+        print("LED ON")
+        time.sleep(on_time)
+        GPIO.output(LED, GPIO.LOW)
+        print("LED OFF")
+        time.sleep(off_time)
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+
