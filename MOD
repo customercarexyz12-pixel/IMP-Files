@@ -1,808 +1,924 @@
-    Slip 1:
-1.Create a multiple linear regression model for house price dataset divide dataset into train and test data while giving it to model and predict prices of house
-
-import pandas as pd 
-import numpy as np 
-import matplotlib.pyplot as plt 
-from sklearn.linear_model import LinearRegression 
-from sklearn.model_selection import train_test_split 
-from sklearn.metrics import mean_absolute_error 
-data=pd.read_csv("house.csv") 
-print(data) 
-x=data[["bedrooms","sqft_living"]] 
-y=data.price 
-print(x) 
-print(y) 
-xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2) 
-print(xtrain) 
-print(xtest) 
-print(ytrain) 
-print(ytest) 
-lr=LinearRegression() 
-lr.fit(xtrain,ytrain) 
-print(lr.intercept_) 
-print(lr.coef_) 
-print(lr.predict([[2,1000]])) 
-ypred=lr.predict(xtest) 
-cm=mean_absolute_error(ytest,ypred) 
-print(cm)
-
-2 .Write a python program the Categorical values in numeric format for a given dataset.
-import pandas as pd
-import numpy as np
-
-# Read the CSV file
-data = pd.read_csv("ass3_data.csv")
-
-# Display the dataset
-print("Original Dataset:")
-print(data)
-
-# Select the first column
-x = data.iloc[:, 0:1].values
-
-print("\nCategorical Values:")
-print(x)
-
-# Label Encoding
-from sklearn.preprocessing import LabelEncoder
-
-le = LabelEncoder()
-
-x1 = le.fit_transform(x.ravel())
-
-print("\nLabel Encoded Values:")
-print(x1)
-
-# One-Hot Encoding
-from sklearn.preprocessing import OneHotEncoder
-
-ohe = OneHotEncoder()
-
-xn = ohe.fit_transform(x).toarray()
-
-print("\nOne-Hot Encoded Values:")
-print(xn)
-Slip 2:
-
-1.Use dataset crash.csv is an accident survivor’s dataset portal for USA hosted by data.gov. The dataset contains passengers age and speed of vehicle (mph) at the time of impact and fate of passengers (1 for survived and 0 for not survived) after a crash. use logistic regression to decide if the age and speed can predict the survivability of the passengers.
-
-import pandas as pd 
-data = pd.read_csv("crash.csv") 
-x = data[['age', 'speed']] 
-y = data['survived'] 
-print(x) 
-print(y) 
-from sklearn.model_selection import train_test_split 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42) 
-from sklearn.linear_model import LogisticRegression 
-model = LogisticRegression() 
-model.fit(X_train, y_train) 
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report 
-y_pred = model.predict(X_test) 
-accuracy = accuracy_score(y_test, y_pred) 
-print(f'Accuracy: {accuracy}') 
-conf_matrix = confusion_matrix(y_test, y_pred) 
-print('Confusion Matrix:') 
-print(conf_matrix) 
-class_report = classification_report(y_test, y_pred) 
-print('Classification Report:') 
-print(class_report) 
-coefficients = model.coef_ 
-intercept = model.intercept_ 
-print(f'Coefficients: {coefficients}') 
-print(f'Intercept: {intercept}')
-
-2.Write a python program to find all null values in a given data set and remove them.
-import pandas as pd
-import numpy as np
-
-# Read CSV file
-data = pd.read_csv("Book3.csv")
-
-# Display original dataset
-print("Original Dataset:")
-print(data)
-
-# Find null values
-print("\nNull Values:")
-print(data.isnull())
-
-# Find non-null values
-print("\nNon-Null Values:")
-print(data.notnull())
-
-# Remove rows containing any null value
-data1 = data.dropna(axis=0, how="any")
-
-print("\nDataset After Removing Null Values:")
-print(data1)
-
-# Replace null values with mean
-data["m1"] = data["m1"].fillna(data["m1"].mean())
-data["m2"] = data["m2"].fillna(data["m2"].mean())
-data["m3"] = data["m3"].fillna(data["m3"].mean())
-
-print("\nDataset After Replacing Null Values With Mean:")
-print(data)
-
-Slip 3:
-1.Fit the simple linear regression and polynomial linear regression models to Salary_positions.csv data. Find which one is more accurately fitting to the given data. Also predict the salaries of level 11 and level 12 employees
-import pandas as pd 
-import numpy as np 
-import matplotlib.pyplot as plt 
-from sklearn.linear_model import LinearRegression 
-data=pd.read_csv("position_salaries.csv") 
-print(data) 
-x=data.iloc[:,1:2].values 
-y=data.iloc[:,2].values 
-print(x) 
-print(y) 
-from sklearn.model_selection import train_test_split 
-xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.25) 
-lr=LinearRegression() 
-lr.fit(xtrain,ytrain) 
-ypred=lr.predict(xtest) 
-plt.scatter(x,y,c="red") 
-plt.plot(x,lr.predict(x),c="green") 
-plt.show() 
-from sklearn.preprocessing import PolynomialFeatures 
-pr=PolynomialFeatures(degree=4) 
-xpoly=pr.fit_transform(x) 
-poreg=LinearRegression() 
-poreg.fit(xpoly,y) 
-plt.scatter(x,y,c="red") 
-plt.plot(x,poreg.predict(pr.fit_transform(x)),c="green") 
-plt.show() 
-print(lr.predict([[11]])) 
-print(poreg.predict(pr.fit_transform([[11]]))) 
-print(lr.predict([[12]])) 
-print(poreg.predict(pr.fit_transform([[12]])))
-
-2.Take iris flower dataset and reduce 4D data to 2D data using PCA. Then train the model and predict new flower with given measurements.
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-# Read Iris dataset
-data = pd.read_csv("iris.csv")
-# Select 4 features
-X = data[[
-    "SepalLengthCm",
-    "SepalWidthCm",
-    "PetalLengthCm",
-    "PetalWidthCm"
-]]
-# Target variable
-y = data["Species"]
-# Reduce 4D data to 2D using PCA
-pca = PCA(n_components=2)
-X_reduced = pca.fit_transform(X)
-print("Original Data Shape:", X.shape)
-print("Reduced Data Shape:", X_reduced.shape)
-# Split data into training and testing
-X_train, X_test, y_train, y_test = train_test_split(
-    X_reduced,
-    y,
-    test_size=0.2,
-    random_state=42
-)
-# Create KNN model
-knn = KNeighborsClassifier(n_neighbors=5)
-# Train the model
-knn.fit(X_train, y_train)
-# Predict test data
-y_pred = knn.predict(X_test)
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print("\nKNN Model Accuracy:", accuracy * 100, "%")
-# New flower measurements
-new_flower = [[5.9, 3.0, 5.1, 1.8]]
-# Reduce new flower from 4D to 2D
-new_flower_reduced = pca.transform(new_flower)
-print("\nNew Flower Reduced Data:")
-print(new_flower_reduced)
-# Predict flower species
-predicted_class = knn.predict(new_flower_reduced)
-print("\nPredicted Flower Species:")
-print(predicted_class[0])
-Slip 4:
-1. Implement Ridge Regression, Lasso regression, Elastic Net model usingboston_houses.csv and take only ‘RM’ and ‘Price’ of the houses. divide the data as training and testing data. Fit line using Ridge regression and to find price of a house if it contains 5 rooms. and compare results.
-import pandas as pd 
-data = pd.read_csv('boston_houses.csv') 
-data = data[['rm', 'price']] 
-X = data[['rm']] 
-y = data['price'] 
-from sklearn.model_selection import train_test_split 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.7) 
-from sklearn.linear_model import Ridge 
-ridge_model = Ridge(alpha=1.0)   
-ridge_model.fit(X_train, y_train) 
-price_5_rooms_ridge = ridge_model.predict([[5]]) 
-print(" ridge Price for a house with 5 rooms:=>",price_5_rooms_ridge) 
-from sklearn.linear_model import Lasso 
-lasso_model = Lasso(alpha=0.1)   
-lasso_model.fit(X_train, y_train) 
-price_5_rooms_lasso = lasso_model.predict([[5]]) 
-print("lasso Price for a house with 5 rooms: =>",price_5_rooms_lasso) 
-from sklearn.linear_model import ElasticNet 
-elasticnet_model = ElasticNet(alpha=1.0, l1_ratio=0.5)   
-elasticnet_model.fit(X_train, y_train) 
-price_5_rooms_elasticnet = elasticnet_model.predict([[5]]) 
-print("ElasticNet Regression - Price for a house with 5 rooms: =>",price_5_rooms_elasticnet)
-
-2.Create a two layered neural network with relu and sigmoid activation function.
-import numpy as np
-
-# Set random seed
-np.random.seed(42)
-
-# Input data: 2 samples, 3 features
-X = np.array([
-    [0.1, 0.2, 0.3],
-    [0.4, 0.5, 0.6]
-])
-
-# Number of neurons
-n_input = 3
-n_hidden = 4
-n_output = 1
-
-# Initialize weights and biases
-W1 = np.random.randn(n_hidden, n_input) * 0.01
-b1 = np.zeros((n_hidden, 1))
-
-W2 = np.random.randn(n_output, n_hidden) * 0.01
-b2 = np.zeros((n_output, 1))
-
-# Forward propagation
-Z1 = np.dot(W1, X.T) + b1
-
-# ReLU activation
-A1 = np.maximum(0, Z1)
-
-# Second layer
-Z2 = np.dot(W2, A1) + b2
-
-# Sigmoid activation
-A2 = 1 / (1 + np.exp(-Z2))
-
-# Display output
-print("Network Output:\n", A2)  
-
-Slip 5:
-1 .Write a python program to Implement Decision Tree classifier model on Data which is extracted from images that were taken from genuine and forged banknote-like specimens.
-
-import pandas as pd 
-from sklearn.model_selection import train_test_split 
-from sklearn.tree import DecisionTreeClassifier 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix 
-data = pd.read_csv('banknote_data.csv') 
-x = data[['variance', 'skewness', 'kurtosis', 'entropy']] 
-y = data['class'] 
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42) 
-dt_classifier = DecisionTreeClassifier(random_state=42) 
-dt_classifier.fit(X_train, y_train) 
-y_pred = dt_classifier.predict(X_test) 
-accuracy = accuracy_score(y_test, y_pred) 
-print(f"Accuracy: {accuracy * 100:.2f}%\n") 
-print("Confusion Matrix:") 
-print(confusion_matrix(y_test, y_pred)) 
-print("\nClassification Report:") 
-print(classification_report(y_test, y_pred)) 
-from sklearn.tree import export_text 
-tree_rules = export_text(dt_classifier, feature_names=list(X.columns)) 
-print("\nDecision Tree Rules:\n") 
-print(tree_rules)
-
-(repeat in slip 1 –Q2)
-2 .Write a python program the Categorical values in numeric format for a given dataset.
-
-import pandas as pd 
-import numpy as np 
-data=pd.read_csv("ass3_data.csv") 
-print(data) 
-x=data.iloc[:,0:1].values 
-print(x) 
-from sklearn.preprocessing import LabelEncoder 
-le=LabelEncoder() 
-x1=le.fit_transform(x) 
-print(x1) 
-from sklearn.preprocessing import OneHotEncoder 
-ohe=OneHotEncoder() 
-xn=ohe.fit_transform(x).toarray() 
-print(xn)
-
-Slip 6:
-1 Classify the iris flowers dataset using SVM and find out the flower type depending on the given input data like sepal length, sepal width, petal length and petal width Find accuracy of all SVM kernels
-import pandas as pd 
-from sklearn.model_selection import train_test_split 
-from sklearn.preprocessing import StandardScaler 
-from sklearn.svm import SVC 
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score 
-import numpy as np 
-data = pd.read_csv("iris.csv") 
-X = data[["SepalLengthCm","SepalWidthCm","PetalLengthCm","PetalWidthCm"]] 
-y = data["Species"] 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42) 
-scaler = StandardScaler() 
-X_train = scaler.fit_transform(X_train) 
-X_test = scaler.transform(X_test) 
-kernels = ['linear', 'poly', 'rbf', 'sigmoid'] 
-for kernel in kernels: 
-model = SVC(kernel=kernel) 
-model.fit(X_train, y_train) 
-y_pred = model.predict(X_test)  
-accuracy = accuracy_score(y_test, y_pred) 
-print(f"Kernel: {kernel}") 
-print(f"Accuracy: {accuracy:.4f}") 
-print(classification_report(y_test, y_pred)) 
-model=SVC(kernel="rbf") 
-model.fit(X_train,y_train) 
-flower_type=model.predict(scaler.fit_transform([[5.1, 3.5, 1.4, 0.2]])) 
-print(f"The predicted flower type is: {flower_type}")
-
-(repeat in slip 2 –Q2)
-2.Write a python program to find all null values in a given data set and remove them.
- import pandas as pd
-import numpy as np
-
-# Read CSV file
-data = pd.read_csv("Book3.csv")
-
-# Display original dataset
-print("Original Dataset:")
-print(data)
-
-# Find null values
-print("\nNull Values:")
-print(data.isnull())
-
-# Find non-null values
-print("\nNon-Null Values:")
-print(data.notnull())
-
-# Remove rows containing any null value
-data1 = data.dropna(axis=0, how="any")
-
-print("\nDataset After Removing Null Values:")
-print(data1)
-
-# Replace null values with mean
-data["m1"] = data["m1"].fillna(data["m1"].mean())
-data["m2"] = data["m2"].fillna(data["m2"].mean())
-data["m3"] = data["m3"].fillna(data["m3"].mean())
-
-print("\nDataset After Replacing Null Values With Mean:")
-print(data)
-
-Slip 7:
-1 Create KNN model on Indian diabetes patient’s database and predict whether a new patient is diabetic (1) or not (0). Find optimal value of K.
-import pandas as pd 
-import numpy as np 
-from sklearn.model_selection import train_test_split, cross_val_score 
-from sklearn.neighbors import KNeighborsClassifier 
-from sklearn.preprocessing import StandardScaler 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix 
-import matplotlib.pyplot as plt 
-data = pd.read_csv('diabetes.csv') 
-print("Dataset Sample:") 
-print(data.head()) 
-X = data.drop(columns=['Outcome'])  # Features 
-y = data['Outcome']         
-        # Target variable (1 = Diabetic, 0 = Non-diabetic) 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) 
-scaler = StandardScaler() 
-X_train = scaler.fit_transform(X_train) 
-X_test = scaler.transform(X_test) 
-k_range = range(1, 26) 
-cv_scores = []  # Store accuracy for each value of k 
-for k in k_range: 
-knn = KNeighborsClassifier(n_neighbors=k) 
-scores = cross_val_score(knn, X_train, y_train, cv=10, scoring='accuracy') 
-cv_scores.append(scores.mean()) 
-plt.plot(k_range, cv_scores) 
-plt.xlabel('Number of Neighbors (k)') 
-plt.ylabel('Cross-Validated Accuracy') 
-plt.title('Finding Optimal k') 
-plt.show() 
-optimal_k = k_range[np.argmax(cv_scores)] 
-print(f"The optimal number of neighbors is {optimal_k}”) 
-knn_optimal = KNeighborsClassifier(n_neighbors=optimal_k) 
-knn_optimal.fit(X_train, y_train) 
-y_pred = knn_optimal.predict(X_test) 
-accuracy = accuracy_score(y_test, y_pred) 
-print(f"Model Accuracy on Test Set: {accuracy * 100:.2f}%") 
-print("\nClassification Report:") 
-print(classification_report(y_test, y_pred)) 
-print("\nConfusion Matrix:") 
-print(confusion_matrix(y_test, y_pred))
-
-(repeat in slip 3-Q2)
-2.Take iris flower dataset and reduce 4D data to 2D data using PCA. Then train the model and predict new flower with given measurements.
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-# Read Iris dataset
-data = pd.read_csv("iris.csv")
-# Select 4 features
-X = data[[
-    "SepalLengthCm",
-    "SepalWidthCm",
-    "PetalLengthCm",
-    "PetalWidthCm"
-]]
-# Target variable
-y = data["Species"]
-# Reduce 4D data to 2D using PCA
-pca = PCA(n_components=2)
-X_reduced = pca.fit_transform(X)
-print("Original Data Shape:", X.shape)
-print("Reduced Data Shape:", X_reduced.shape)
-# Split data into training and testing
-X_train, X_test, y_train, y_test = train_test_split(
-    X_reduced,
-    y,
-    test_size=0.2,
-    random_state=42
-)
-# Create KNN model
-knn = KNeighborsClassifier(n_neighbors=5)
-# Train the model
-knn.fit(X_train, y_train)
-# Predict test data
-y_pred = knn.predict(X_test)
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print("\nKNN Model Accuracy:", accuracy * 100, "%")
-# New flower measurements
-new_flower = [[5.9, 3.0, 5.1, 1.8]]
-# Reduce new flower from 4D to 2D
-new_flower_reduced = pca.transform(new_flower)
-print("\nNew Flower Reduced Data:")
-print(new_flower_reduced)
-# Predict flower species
-predicted_class = knn.predict(new_flower_reduced)
-print("\nPredicted Flower Species:")
-print(predicted_class[0])
-Slip 8:
-1.Use K-means clustering model and classify the employees into various income groups or clusters. Preprocess data if require (i.e. drop missing or null values). Use elbow method and Silhouette Score to find value of k.
-import pandas as pd 
-import numpy as np 
-from sklearn.cluster import KMeans 
-from sklearn.preprocessing import StandardScaler 
-from sklearn.metrics import silhouette_score 
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-df = pd.read_csv('employee_data.csv') 
-df.dropna(inplace=True) 
-data = df[['Age', 'Experience', 'Income']] 
-scaler = StandardScaler() 
-scaled_data = scaler.fit_transform(data) 
-inertia = []  
-for k in range(1, 11): 
-kmeans = KMeans(n_clusters=k, random_state=42) 
-kmeans.fit(scaled_data) 
-inertia.append(kmeans.inertia_) 
-plt.figure(figsize=(8, 5)) 
-plt.plot(range(1, 11), inertia, marker='o') 
-plt.xlabel('Number of Clusters (k)') 
-plt.ylabel('Inertia (Sum of Squared Distances)') 
-plt.title('Elbow Method for Optimal k') 
-plt.show() 
-silhouette_scores = [] 
-for k in range(2, 11):  # Silhouette score is not defined for k=1 
-kmeans = KMeans(n_clusters=k, random_state=42) 
-cluster_labels = kmeans.fit_predict(scaled_data) 
-silhouette_scores.append(silhouette_score(scaled_data, cluster_labels)) 
-plt.figure(figsize=(8, 5)) 
-plt.plot(range(2, 11), silhouette_scores, marker='o', color='r') 
-plt.xlabel('Number of Clusters (k)') 
-plt.ylabel('Silhouette Score') 
-plt.title('Silhouette Score for Different k Values') 
-plt.show() 
-optimal_k = 3  
-kmeans = KMeans(n_clusters=optimal_k, random_state=42) 
-df['Cluster'] = kmeans.fit_predict(scaled_data) 
-plt.figure(figsize=(8, 5)) 
-sns.scatterplot(data=df, x='Income', y='Experience', hue='Cluster', palette='Set1', s=100) 
-plt.title('Employee Clusters Based on Income and Experience') 
-plt.show() 
-cluster_centers = scaler.inverse_transform(kmeans.cluster_centers_) 
-print("Cluster Centers:\n", cluster_centers)2
-(repeat in slip 4-Q2)
-2.Create a two layered neural network with relu and sigmoid activation function.
-import numpy as np
-
-# Set random seed
-np.random.seed(42)
-
-# Input data: 2 samples, 3 features
-X = np.array([
-    [0.1, 0.2, 0.3],
-    [0.4, 0.5, 0.6]
-])
-
-# Number of neurons
-n_input = 3
-n_hidden = 4
-n_output = 1
-
-# Initialize weights and biases
-W1 = np.random.randn(n_hidden, n_input) * 0.01
-b1 = np.zeros((n_hidden, 1))
-
-W2 = np.random.randn(n_output, n_hidden) * 0.01
-b2 = np.zeros((n_output, 1))
-
-# Forward propagation
-Z1 = np.dot(W1, X.T) + b1
-
-# ReLU activation
-A1 = np.maximum(0, Z1)
-
-# Second layer
-Z2 = np.dot(W2, A1) + b2
-
-# Sigmoid activation
-A2 = 1 / (1 + np.exp(-Z2))
-
-# Display output
-print("Network Output:\n", A2)  
-
-Slip 9:
-1.The data set refers to clients of a wholesale distributor. It includes the annual spending in monetary units on diverse product categories. Using data Wholesale customer dataset compute agglomerative clustering to find out annual spending clients in the same region.
-import pandas as pd 
-from sklearn.preprocessing import StandardScaler 
-from sklearn.cluster import AgglomerativeClustering 
-import scipy.cluster.hierarchy as sch 
-import matplotlib.pyplot as plt 
-data = pd.read_csv('wholesale.csv') 
-X = data.drop(['Region', 'Channel'], axis=1) 
-scaler = StandardScaler() 
-X_scaled = scaler.fit_transform(X) 
-agg_clustering = AgglomerativeClustering(n_clusters=3, linkage='ward') 
-clusters = agg_clustering.fit_predict(X_scaled) 
-data['Cluster'] = clusters 
-print(data) 
-dendrogram = sch.dendrogram(sch.linkage(X_scaled, method='ward')) 
-plt.title('Dendrogram') 
-plt.xlabel('Customers') 
-plt.ylabel('Euclidean Distances') 
-plt.show() 
-print(data['Cluster'].value_counts()) 
-cluster_summary = data.groupby('Cluster').mean() 
-print(cluster_summary)
-
-(repeat in slip 5,1-Q2)
-2. Write a python program the Categorical values in numeric format for a given dataset.
-import pandas as pd 
-import numpy as np 
-data=pd.read_csv("ass3_data.csv") 
-print(data) 
-x=data.iloc[:,0:1].values 
-print(x) 
-from sklearn.preprocessing import LabelEncoder 
-le=LabelEncoder() 
-x1=le.fit_transform(x) 
-print(x1) 
-from sklearn.preprocessing import OneHotEncoder 
-ohe=OneHotEncoder() 
-xn=ohe.fit_transform(x).toarray() 
-print(xn)
-
-Slip 10:
-1.Use Apriori algorithm on groceries dataset to find which items are brought together. Use minimum support =0.25
-import pandas as pd 
-from mlxtend.preprocessing import TransactionEncoder 
-from mlxtend.frequent_patterns import apriori, association_rules 
-groceries = [ 
-['milk', 'bread', 'eggs'], 
-['milk', 'bread'], 
-['milk', 'butter', 'bread'], 
-['bread', 'eggs'], 
-['butter', 'eggs'] 
-] 
-te = TransactionEncoder() 
-te_ary = te.fit(groceries).transform(groceries) 
-df = pd.DataFrame(te_ary, columns=te.columns_) 
-print("Binary Matrix of Transactions:") 
-print(df) 
-frequent_itemsets = apriori(df, min_support=0.25, use_colnames=True) 
-print("\nFrequent Itemsets:") 
-print(frequent_itemsets) 
-rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.5) 
-print("\nAssociation Rules:") 
-print(rules[['antecedents', 'consequents', 'support', 'confidence']])
-
-(repeat in slip 6,2-Q2)
-
-2.Write a python program to find all null values in a given data set and remove them. 3 Viva 15
-import pandas as pd
-import numpy as np
-
-# Read CSV file
-data = pd.read_csv("Book3.csv")
-
-# Display original dataset
-print("Original Dataset:")
-print(data)
-
-# Find null values
-print("\nNull Values:")
-print(data.isnull())
-
-# Find non-null values
-print("\nNon-Null Values:")
-print(data.notnull())
-
-# Remove rows containing any null value
-data1 = data.dropna(axis=0, how="any")
-
-print("\nDataset After Removing Null Values:")
-print(data1)
-
-# Replace null values with mean
-data["m1"] = data["m1"].fillna(data["m1"].mean())
-data["m2"] = data["m2"].fillna(data["m2"].mean())
-data["m3"] = data["m3"].fillna(data["m3"].mean())
-
-print("\nDataset After Replacing Null Values With Mean:")
-print(data)
-
-Slip 11:
-1.Create an ANN and train it on house price dataset classify the house price is above average or below average.
-import numpy as np    
-import pandas as pd 
-from sklearn.datasets import fetch_california_housing 
-from sklearn.model_selection import train_test_split 
-from sklearn.preprocessing import StandardScaler 
-from tensorflow.keras.models import Sequential    
-from tensorflow.keras.layers import Dense 
-data = fetch_california_housing() 
-X = data.data  # Features 
-y = data.target  # Target (house prices) 
-average_price = np.mean(y) 
-y_binary = np.where(y > average_price, 1, 0)   
-X_train, X_test, y_train, y_test = train_test_split(X, y_binary, test_size=0.2, random_state=42) 
-scaler = StandardScaler() 
-X_train = scaler.fit_transform(X_train) 
-X_test = scaler.transform(X_test) 
-model = Sequential() 
-model.add(Dense(16, input_shape=(X_train.shape[1],), activation='relu'))   
-model.add(Dense(8, activation='relu'))   
-model.add(Dense(1, activation='sigmoid'))   
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']) 
-history = model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2, verbose=1) 
-test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose=1) 
-print(f"\nTest Accuracy: {test_accuracy * 100:.2f}%") 
-y_pred = model.predict(X_test) > 0.5   
-print("\nSample Predictions:") 
-for i in range(5): 
-print(f"Predicted: {'Above Average' if y_pred[i] else 'Below Average'}, Actual: {'Above Average' if 
-y_test[i] else 'Below Average'}")
-(repeat in slip 7,3-Q2)
-2.Take iris flower dataset and reduce 4D data to 2D data using PCA. Then train the model and predict new flower with given measurements.
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-# Read Iris dataset
-data = pd.read_csv("iris.csv")
-# Select 4 features
-X = data[[
-    "SepalLengthCm",
-    "SepalWidthCm",
-    "PetalLengthCm",
-    "PetalWidthCm"
-]]
-# Target variable
-y = data["Species"]
-# Reduce 4D data to 2D using PCA
-pca = PCA(n_components=2)
-X_reduced = pca.fit_transform(X)
-print("Original Data Shape:", X.shape)
-print("Reduced Data Shape:", X_reduced.shape)
-# Split data into training and testing
-X_train, X_test, y_train, y_test = train_test_split(
-    X_reduced,
-    y,
-    test_size=0.2,
-    random_state=42
-)
-# Create KNN model
-knn = KNeighborsClassifier(n_neighbors=5)
-# Train the model
-knn.fit(X_train, y_train)
-# Predict test data
-y_pred = knn.predict(X_test)
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print("\nKNN Model Accuracy:", accuracy * 100, "%")
-# New flower measurements
-new_flower = [[5.9, 3.0, 5.1, 1.8]]
-# Reduce new flower from 4D to 2D
-new_flower_reduced = pca.transform(new_flower)
-print("\nNew Flower Reduced Data:")
-print(new_flower_reduced)
-# Predict flower species
-predicted_class = knn.predict(new_flower_reduced)
-print("\nPredicted Flower Species:")
-print(predicted_class[0])
-
-Slip 12:
-1.Create a CNN model and train it on mnist handwritten digit dataset. Using model find out the digit written by a hand in a given image. Import mnist dataset from tensorflow.keras.datasets
-import numpy as np 
-import matplotlib.pyplot as plt 
-from tensorflow.keras.datasets import mnist 
-from tensorflow.keras.models import Sequential 
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense 
-from tensorflow.keras.utils import to_categorical 
-from tensorflow.keras.preprocessing import image 
-(X_train, y_train), (X_test, y_test) = mnist.load_data() 
-X_train = X_train.reshape(-1, 28, 28, 1).astype('float32') / 255.0 
-X_test = X_test.reshape(-1, 28, 28, 1).astype('float32') / 255.0 
-y_train = to_categorical(y_train, 10) 
-y_test = to_categorical(y_test, 10) 
-model = Sequential([Conv2D(32, kernel_size=(3,3), activation='relu', input_shape=(28,28,1)), 
-MaxPooling2D(pool_size=(2,2)), Conv2D(64, kernel_size=(3,3), activation='relu'), 
-MaxPooling2D(pool_size=(2,2)),Flatten(), Dense(128, activation='relu'), 
-Dense(10, activation='softmax')]) 
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy']) 
-model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=5, batch_size=128) 
-loss, accuracy = model.evaluate(X_test, y_test) 
-print(f"Test Accuracy: {accuracy * 100:.2f}%") 
-sample_image = X_test[0].reshape(1,28,28,1)  # Reshape to match input shape 
-predicted_class = np.argmax(model.predict(sample_image)) 
-print(f"Predicted digit: {predicted_class}")
-
-(repeat in slip 4,8-Q2)
-2.Create a two layered neural network with relu and sigmoid activation function.
-import numpy as np
-
-# Set random seed
-np.random.seed(42)
-
-# Input data: 2 samples, 3 features
-X = np.array([
-    [0.1, 0.2, 0.3],
-    [0.4, 0.5, 0.6]
-])
-
-# Number of neurons
-n_input = 3
-n_hidden = 4
-n_output = 1
-
-# Initialize weights and biases
-W1 = np.random.randn(n_hidden, n_input) * 0.01
-b1 = np.zeros((n_hidden, 1))
-
-W2 = np.random.randn(n_output, n_hidden) * 0.01
-b2 = np.zeros((n_output, 1))
-
-# Forward propagation
-Z1 = np.dot(W1, X.T) + b1
-
-# ReLU activation
-A1 = np.maximum(0, Z1)
-
-# Second layer
-Z2 = np.dot(W2, A1) + b2
-
-# Sigmoid activation
-A2 = 1 / (1 + np.exp(-Z2))
-
-# Display output
-print("Network Output:\n", A2)  
+Q.1	Write a Java Program to implement I/O Decorator for converting uppercase letters to lower case letters.      [15M].
+
+Solution: - 
+
+ToLower.java
+
+public interface ToLower {
+    public void lower(String ch);
+}
+
+LowerCase.java
+
+public class LowerCase implements ToLower {
+
+    public void lower(String ch) {
+        ch = ch.toLowerCase();
+        System.out.println("Lowercase: " + ch);
+    }
+}
+
+Decorator.java
+
+import java.util.Scanner;
+
+public class Decorator {
+
+    public static void main(String[] args) {
+
+        ToLower lo = new LowerCase();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+        String s = sc.nextLine();
+
+        lo.lower(s);
+
+        sc.close();
+    }
+}
+2. Write a Java Program to implement Singleton pattern for multithreading.
+
+class Singleton {
+
+    private static Singleton obj;
+
+    private Singleton() {
+        System.out.println("Singleton Object Created");
+    }
+
+    public static synchronized Singleton getInstance() {
+
+        if (obj == null) {
+            obj = new Singleton();
+        }
+
+        return obj;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Thread t1 = new Thread(() -> {
+            Singleton s = Singleton.getInstance();
+            System.out.println("Thread 1: " + s);
+        });
+
+        Thread t2 = new Thread(() -> {
+            Singleton s = Singleton.getInstance();
+            System.out.println("Thread 2: " + s);
+        });
+
+        t1.start();
+        t2.start();
+    }
+}
+
+3. Write a Java Program to implement Factory method for Pizza Store with createPizza(), orederPizza(), prepare(), Bake(), cut(), box(). Use this to create variety of pizza’s like NyStyleCheesePizza, ChicagoStyleCheesePizza etc.
+
+abstract class Pizza {
+    void prepare() {
+        System.out.println("Preparing Pizza");
+    }
+
+    void bake() {
+        System.out.println("Baking Pizza");
+    }
+
+    void cut() {
+        System.out.println("Cutting Pizza");
+    }
+
+    void box() {
+        System.out.println("Packing Pizza");
+    }
+}
+
+class NYStyleCheesePizza extends Pizza {
+    NYStyleCheesePizza() {
+        System.out.println("New York Cheese Pizza");
+    }
+}
+
+class ChicagoStyleCheesePizza extends Pizza {
+    ChicagoStyleCheesePizza() {
+        System.out.println("Chicago Cheese Pizza");
+    }
+}
+
+abstract class PizzaStore {
+    abstract Pizza createPizza();
+
+    Pizza orderPizza() {
+        Pizza p = createPizza();
+        p.prepare();
+        p.bake();
+        p.cut();
+        p.box();
+        return p;
+    }
+}
+
+class NYPizzaStore extends PizzaStore {
+    Pizza createPizza() {
+        return new NYStyleCheesePizza();
+    }
+}
+
+class ChicagoPizzaStore extends PizzaStore {
+    Pizza createPizza() {
+        return new ChicagoStyleCheesePizza();
+    }
+}
+
+public class Slip4 {
+    public static void main(String[] args) {
+        PizzaStore store = new NYPizzaStore();
+        store.orderPizza();
+
+        System.out.println("----------------");
+
+        store = new ChicagoPizzaStore();
+        store.orderPizza();
+    }
+}
+
+	4. Write a JAVA Program to implement built-in support (java.util.Observable) Weather 
+station with members temperature, humidity, pressure and methods 
+mesurmentsChanged(), setMesurment(), getTemperature(), getHumidity(), 
+getPressure().
+
+import java.util.Observable;
+import java.util.Observer;
+
+class WeatherStation extends Observable {
+    float temperature, humidity, pressure;
+
+    void setMeasurement(float t, float h, float p) {
+        temperature = t;
+        humidity = h;
+        pressure = p;
+        measurementsChanged();
+    }
+
+    void measurementsChanged() {
+        setChanged();
+        notifyObservers();
+    }
+
+    float getTemperature() {
+        return temperature;
+    }
+
+    float getHumidity() {
+        return humidity;
+    }
+
+    float getPressure() {
+        return pressure;
+    }
+}
+
+class Display implements Observer {
+    public void update(Observable o, Object arg) {
+        WeatherStation w = (WeatherStation)o;
+        System.out.println("Temperature: " + w.getTemperature());
+        System.out.println("Humidity: " + w.getHumidity());
+        System.out.println("Pressure: " + w.getPressure());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        WeatherStation w = new WeatherStation();
+        w.addObserver(new Display());
+
+        w.setMeasurement(30, 60, 1013);
+    }
+}
+
+5. Write a Java Program to implement Adapter pattern for Enumeration iterator.
+
+import java.util.*;
+
+class EnumAdapter implements Iterator {
+
+    Enumeration e;
+
+    EnumAdapter(Enumeration e) {
+        this.e = e;
+    }
+
+    public boolean hasNext() {
+        return e.hasMoreElements();
+    }
+
+    public Object next() {
+        return e.nextElement();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Vector v = new Vector();
+
+        v.add("Apple");
+        v.add("Mango");
+        v.add("Banana");
+
+        Iterator i = new EnumAdapter(v.elements());
+
+        while (i.hasNext()) {
+            System.out.println(i.next());
+        }
+    }
+}
+
+6. Write a Java Program to implement command pattern to test Remote Control
+
+interface Command {
+    void execute();
+}
+class Light {
+    void on() {
+        System.out.println("Light is ON");
+    }
+}
+class LightOnCommand implements Command {
+    Light l;
+    LightOnCommand(Light l) {
+        this.l = l;
+    }
+
+    public void execute() {
+        l.on();
+    }
+}
+class RemoteControl {
+    Command c;
+
+    void setCommand(Command c) {
+        this.c = c;
+    }
+    void pressButton() {
+        c.execute();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+
+        Light l = new Light();
+        Command cmd = new LightOnCommand(l);
+        RemoteControl r = new RemoteControl();
+        r.setCommand(cmd);
+        r.pressButton();
+    }
+}
+
+7. Write a Java Program to implement undo command to test Ceiling fan.
+
+interface Command {
+    void execute();
+    void undo();
+}
+
+class CeilingFan {
+    void on() {
+        System.out.println("Fan is ON");
+    }
+
+    void off() {
+        System.out.println("Fan is OFF");
+    }
+}
+
+class FanOnCommand implements Command {
+    CeilingFan fan;
+
+    FanOnCommand(CeilingFan fan) {
+        this.fan = fan;
+    }
+
+    public void execute() {
+        fan.on();
+    }
+
+    public void undo() {
+        fan.off();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        CeilingFan fan = new CeilingFan();
+
+        FanOnCommand cmd = new FanOnCommand(fan);
+
+        cmd.execute();
+        cmd.undo();
+    }
+}
+
+8. Write a Java Program to implement State Pattern for Gumball Machine. Create instance variable that holds current state from there, we just need to handle all actions, behaviors and state transition that can happen.
+
+interface State {
+    void insertCoin();
+    void turnCrank();
+    void dispense();
+}
+
+class GumballMachine {
+    State state;
+
+    State noCoin = new NoCoinState(this);
+    State hasCoin = new HasCoinState(this);
+
+    GumballMachine() {
+        state = noCoin;
+    }
+
+    void insertCoin() {
+        state.insertCoin();
+    }
+
+    void turnCrank() {
+        state.turnCrank();
+    }
+
+    void dispense() {
+        state.dispense();
+    }
+
+    void setState(State s) {
+        state = s;
+    }
+}
+
+class NoCoinState implements State {
+    GumballMachine machine;
+
+    NoCoinState(GumballMachine m) {
+        machine = m;
+    }
+
+    public void insertCoin() {
+        System.out.println("Coin Inserted");
+        machine.setState(machine.hasCoin);
+    }
+
+    public void turnCrank() {
+        System.out.println("Insert Coin First");
+    }
+
+    public void dispense() {
+        System.out.println("No Gumball");
+    }
+}
+
+class HasCoinState implements State {
+    GumballMachine machine;
+
+    HasCoinState(GumballMachine m) {
+        machine = m;
+    }
+
+    public void insertCoin() {
+        System.out.println("Coin Already Inserted");
+    }
+
+    public void turnCrank() {
+        System.out.println("Crank Turned");
+        machine.dispense();
+    }
+
+    public void dispense() {
+        System.out.println("Gumball Dispensed");
+        machine.setState(machine.noCoin);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        GumballMachine g = new GumballMachine();
+
+        g.insertCoin();
+        g.turnCrank();
+    }
+}
+
+9. Design simple HR Application using Spring Framework.
+
+Employee.java
+
+public class Employee {
+    int id;
+    String name;
+    String department;
+
+    public Employee(int id, String name, String department) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+    }
+
+    public void display() {
+        System.out.println(id + " " + name + " " + department);
+    }
+}
+
+EmployeeService.java
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeeService {
+
+    public void showEmployee() {
+        Employee e = new Employee(101, "Rahul", "HR");
+        e.display();
+    }
+}
+
+EmployeeController.java
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class EmployeeController {
+
+    @Autowired
+    EmployeeService service;
+
+    public void display() {
+        service.showEmployee();
+    }
+}
+
+Main.java
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ApplicationContext context =
+            new AnnotationConfigApplicationContext("com.example");
+
+        EmployeeController obj =
+            context.getBean(EmployeeController.class);
+
+        obj.display();
+    }
+}
+
+10. Write a Java Program to implement Strategy Pattern for Duck Behavior. Create instance variable that holds current state of Duck from there, we just need to handle all Flying Behaviors and Quack Behavior.
+
+interface FlyBehavior {
+    void fly();
+}
+
+interface QuackBehavior {
+    void quack();
+}
+
+class FlyWithWings implements FlyBehavior {
+    public void fly() {
+        System.out.println("Duck is Flying");
+    }
+}
+
+class Quack implements QuackBehavior {
+    public void quack() {
+        System.out.println("Duck is Quacking");
+    }
+}
+
+class Duck {
+    FlyBehavior flyBehavior;
+    QuackBehavior quackBehavior;
+
+    Duck(FlyBehavior f, QuackBehavior q) {
+        flyBehavior = f;
+        quackBehavior = q;
+    }
+
+    void performFly() {
+        flyBehavior.fly();
+    }
+
+    void performQuack() {
+        quackBehavior.quack();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Duck d = new Duck(
+            new FlyWithWings(),
+            new Quack()
+        );
+
+        d.performFly();
+        d.performQuack();
+    }
+}
+
+11. Write a java program to implement Adapter pattern to design Heart Model to Beat Model.
+
+interface BeatModel {
+    void on();
+    void off();
+    void beat();
+}
+
+class HeartModel {
+    void start() {
+        System.out.println("Heart Started");
+    }
+
+    void stop() {
+        System.out.println("Heart Stopped");
+    }
+
+    void heartBeat() {
+        System.out.println("Heart is Beating");
+    }
+}
+
+class HeartAdapter implements BeatModel {
+    HeartModel heart = new HeartModel();
+
+    public void on() {
+        heart.start();
+    }
+
+    public void off() {
+        heart.stop();
+    }
+
+    public void beat() {
+        heart.heartBeat();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        BeatModel beat = new HeartAdapter();
+
+        beat.on();
+        beat.beat();
+        beat.off();
+    }
+}
+
+12. Write a Java Program to implement Decorator Pattern for interface Car to define the assemble() method and then decorate it to Sports car and Luxury Car.
+
+interface Car {
+    void assemble();
+}
+
+class BasicCar implements Car {
+    public void assemble() {
+        System.out.println("Basic Car");
+    }
+}
+
+class SportsCar implements Car {
+    Car car;
+
+    SportsCar(Car car) {
+        this.car = car;
+    }
+
+    public void assemble() {
+        car.assemble();
+        System.out.println("Sports Car");
+    }
+}
+
+class LuxuryCar implements Car {
+    Car car;
+
+    LuxuryCar(Car car) {
+        this.car = car;
+    }
+
+    public void assemble() {
+        car.assemble();
+        System.out.println("Luxury Car");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Car car = new BasicCar();
+
+        car = new SportsCar(car);
+        car = new LuxuryCar(car);
+
+        car.assemble();
+    }
+}
+
+13. Write a Java Program to implement an Adapter design pattern in mobile charger. Define two classes – Volt (to measure volts) and Socket (producing constant volts of 120V). Build an adapter that can produce 3 volts, 12 volts and default 120 volts. Implements Adapter pattern using Class Adapter.
+
+class Volt {
+    int volts;
+
+    Volt(int v) {
+        volts = v;
+    }
+
+    int getVolts() {
+        return volts;
+    }
+}
+
+class Socket {
+    Volt getVolt() {
+        return new Volt(120);
+    }
+}
+
+class SocketAdapter extends Socket {
+
+    Volt get3Volt() {
+        return new Volt(3);
+    }
+
+    Volt get12Volt() {
+        return new Volt(12);
+    }
+
+    Volt get120Volt() {
+        return getVolt();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        SocketAdapter s = new SocketAdapter();
+
+        System.out.println("3V: " + s.get3Volt().getVolts());
+        System.out.println("12V: " + s.get12Volt().getVolts());
+        System.out.println("120V: " + s.get120Volt().getVolts());
+    }
+}
+
+
+14. Write a Java Program to implement Command Design Pattern for Command Interface with execute() . Use this to create variety of commands for LightOnCommand, LightOffCommand, GarageDoorUpCommand, StereoOnWithCDComman.
+
+interface Command {
+    void execute();
+}
+
+class Light {
+    void on() {
+        System.out.println("Light is ON");
+    }
+
+    void off() {
+        System.out.println("Light is OFF");
+    }
+}
+
+class GarageDoor {
+    void up() {
+        System.out.println("Garage Door is UP");
+    }
+}
+
+class Stereo {
+    void on() {
+        System.out.println("Stereo is ON with CD");
+    }
+}
+
+class LightOnCommand implements Command {
+    Light l;
+
+    LightOnCommand(Light l) {
+        this.l = l;
+    }
+
+    public void execute() {
+        l.on();
+    }
+}
+
+class LightOffCommand implements Command {
+    Light l;
+
+    LightOffCommand(Light l) {
+        this.l = l;
+    }
+
+    public void execute() {
+        l.off();
+    }
+}
+
+class GarageDoorUpCommand implements Command {
+    GarageDoor g;
+
+    GarageDoorUpCommand(GarageDoor g) {
+        this.g = g;
+    }
+
+    public void execute() {
+        g.up();
+    }
+}
+
+class StereoOnWithCDCommand implements Command {
+    Stereo s;
+
+    StereoOnWithCDCommand(Stereo s) {
+        this.s = s;
+    }
+
+    public void execute() {
+        s.on();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Light l = new Light();
+        GarageDoor g = new GarageDoor();
+        Stereo s = new Stereo();
+
+        Command c1 = new LightOnCommand(l);
+        Command c2 = new LightOffCommand(l);
+        Command c3 = new GarageDoorUpCommand(g);
+        Command c4 = new StereoOnWithCDCommand(s);
+
+        c1.execute();
+        c2.execute();
+        c3.execute();
+        c4.execute();
+    }
+}
+
+15. Write a Java Program to implement Facade Design Pattern for Home Theater.
+
+class DVD {
+    void on() {
+        System.out.println("DVD is ON");
+    }
+}
+
+class Projector {
+    void on() {
+        System.out.println("Projector is ON");
+    }
+}
+
+class SoundSystem {
+    void on() {
+        System.out.println("Sound System is ON");
+    }
+}
+
+class HomeTheaterFacade {
+    DVD d = new DVD();
+    Projector p = new Projector();
+    SoundSystem s = new SoundSystem();
+
+    void watchMovie() {
+        d.on();
+        p.on();
+        s.on();
+        System.out.println("Movie Started");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HomeTheaterFacade h = new HomeTheaterFacade();
+        h.watchMovie();
+    }
+}
+
+16. Write a Java Program to implement Observer Design Pattern for number conversion. Accept a number in Decimal form and represent it in Hexadecimal, Octal and Binary. Change the Number and it reflects in other forms also.
+
+import java.util.*;
+
+class Number {
+    int num;
+    ArrayList<Observer> list = new ArrayList<>();
+
+    void addObserver(Observer o) {
+        list.add(o);
+    }
+
+    void setNumber(int n) {
+        num = n;
+        for (Observer o : list)
+            o.update(num);
+    }
+}
+
+interface Observer {
+    void update(int n);
+}
+
+class Binary implements Observer {
+    public void update(int n) {
+        System.out.println("Binary: " + Integer.toBinaryString(n));
+    }
+}
+
+class Octal implements Observer {
+    public void update(int n) {
+        System.out.println("Octal: " + Integer.toOctalString(n));
+    }
+}
+
+class Hexadecimal implements Observer {
+    public void update(int n) {
+        System.out.println("Hexadecimal: " + Integer.toHexString(n));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Number num = new Number();
+
+        num.addObserver(new Binary());
+        num.addObserver(new Octal());
+        num.addObserver(new Hexadecimal());
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Decimal Number: ");
+        num.setNumber(sc.nextInt());
+
+        sc.close();
+    }
+}
+
+17. Write a Java Program to implement Abstract Factory Pattern for Shape interface.
+
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+    public void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+class Rectangle implements Shape {
+    public void draw() {
+        System.out.println("Drawing Rectangle");
+    }
+}
+
+interface AbstractFactory {
+    Shape getShape(String type);
+}
+
+class ShapeFactory implements AbstractFactory {
+    public Shape getShape(String type) {
+        if (type.equalsIgnoreCase("Circle"))
+            return new Circle();
+        else if (type.equalsIgnoreCase("Rectangle"))
+            return new Rectangle();
+
+        return null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        AbstractFactory factory = new ShapeFactory();
+
+        Shape s1 = factory.getShape("Circle");
+        Shape s2 = factory.getShape("Rectangle");
+
+        s1.draw();
+        s2.draw();
+    }
+}
+
+
+
+
 
