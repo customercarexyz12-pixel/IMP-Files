@@ -1,921 +1,418 @@
-Q.1	Write a Java Program to implement I/O Decorator for converting uppercase letters to lower case letters.      [15M].
+Slip -1
+Q.1) Write an AngularJS script for addition of two numbers using ng-init, ng-model & ng-bind. And also demonstrate ng-show, ng-disabled, ng-click directives on button component.
+	Add.html
+<!DOCTYPE html>
+<html ng-app="">
+<head>	
+    <title>AngularJS Addition</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>	
+</head>
+<body>
+    <h2>Addition of Two Numbers</h2>
+    <div ng-init="a=10; b=20">
+        Enter First Number:
+        <input type="number" ng-model="a">
+        <br><br>
+        Enter Second Number:
+        <input type="number" ng-model="b">
+        <br><br>
+        Sum: <span ng-bind="a+b"></span>
+        <hr>
+        <h3>Button Directives</h3>
+        <button ng-click="show=true">
+            Show Message
+        </button>
+        <p ng-show="show">
+            Welcome to AngularJS!
+        </p>
+        <button ng-disabled="!show">
+            Disabled Button
+        </button>
+    </div>
+</body>
+</html>
 
-Solution: - 
-
-ToLower.java
-
-public interface ToLower {
-    public void lower(String ch);
-}
-
-LowerCase.java
-
-public class LowerCase implements ToLower {
-
-    public void lower(String ch) {
-        ch = ch.toLowerCase();
-        System.out.println("Lowercase: " + ch);
+2. Create a Node.js application that reads data from multiple files asynchronously using promises and async/await.
+Demo.js
+const fs = require('fs').promises;
+async function readFiles() {
+    try {
+        const data1 = await fs.readFile('file1.txt', 'utf8');
+        const data2 = await fs.readFile('file2.txt', 'utf8');
+        const data3 = await fs.readFile('file3.txt', 'utf8');
+        console.log(data1);
+        console.log(data2);
+        console.log(data3);
+    } catch (error) {					
+        console.log("Error:", error.message);
     }
 }
+readFiles();
 
-Decorator.java
+Slip 2 and Slip 4
+1.. Write an AngularJS script to print details of bank (bank name, MICR code, IFC code, address etc.) in tabular form using ng-repeat.
+Bank.html
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <title>Bank Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <h2>Bank Details</h2>
+    <div ng-init="banks=[
+    {name:'SBI', micr:'400002001', ifsc:'SBIN0001234', address:'Pune'},
+    {name:'HDFC', micr:'400240002', ifsc:'HDFC0001234', address:'Mumbai'},
+    {name:'ICICI', micr:'400229003', ifsc:'ICIC0001234', address:'Delhi'}
+    ]">
 
-import java.util.Scanner;
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Bank Name</th>
+            <th>MICR Code</th>
+            <th>IFSC Code</th>
+            <th>Address</th>
+        </tr>
 
-public class Decorator {
+        <tr ng-repeat="bank in banks">
+            <td>{{bank.name}}</td>
+            <td>{{bank.micr}}</td>
+            <td>{{bank.ifsc}}</td>
+            <td>{{bank.address}}</td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>
+4. Implement a simple server using Node.js.
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write("<h1>Welcome to Node.js Server</h1>");
+    res.write("<p>Server is running successfully!</p>");
+    res.end();
+});
+server.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});
 
-    public static void main(String[] args) {
 
-        ToLower lo = new LowerCase();
 
-        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter String: ");
-        String s = sc.nextLine();
 
-        lo.lower(s);
+5. Find a company with a workforce greater than 30 in the array (use find by  
+id method). (company.js.) (same in slip-3and 6 and 9)
+const companies = [
+    {id: 1, name: "TCS", workforce: 50},
+    {id: 2, name: "Infosys", workforce: 25},
+    {id: 3, name: "Wipro", workforce: 40},
+    {id: 4, name: "Google", workforce: 20}
+];
+const result = companies.find(company => company.workforce > 30);
+console.log("Company Details:");
+console.log(result);
 
-        sc.close();
-    }
+6. Create a simple Angular component that takes input data and displays it.
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `
+    <h2>Student Details</h2>
+    <p>Name: {{name}}</p>
+    <p>Age: {{age}}</p>
+  `
+})
+export class App {
+  @Input() name: string = "Rahul";
+  @Input() age: number = 22;
 }
-2. Write a Java Program to implement Singleton pattern for multithreading.
+6. Create Angular application that print the name of students who got 85% using filter and map method.
+(RUN-  ng serve –open)
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <h2>Students Having 85% Marks</h2>
+    <p *ngFor="let name of result">{{name}}</p>
+  `
+})
+export class App {
+  students = [
+    {name: 'Rahul', percentage: 85},
+    {name: 'Priya', percentage: 90},
+    {name: 'Amit', percentage: 85},
+    {name: 'Sneha', percentage: 75}
+  ];
 
-class Singleton {
-
-    private static Singleton obj;
-
-    private Singleton() {
-        System.out.println("Singleton Object Created");
-    }
-
-    public static synchronized Singleton getInstance() {
-
-        if (obj == null) {
-            obj = new Singleton();
-        }
-
-        return obj;
-    }
+  result = this.students
+    .filter(s => s.percentage === 85)
+    .map(s => s.name);
 }
+7. Write an AngularJS script to display list of games stored in an array on click of button using ng-click and also demonstrate ng-init, ng-bind directive of AngularJS.
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <title>Games List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-init="games=['Cricket','Football','BGMI','Hockey','Chess']; show=false">
+    <h2>Game List</h2>
+    <button ng-click="show=true">Display Games</button>
+    <ul ng-if="show">
+        <li ng-repeat="g in games" ng-bind="g"></li>
+    </ul>
+</body>
+</html>
 
-public class Main {
+8. Find an emp with a Salary greater than 25000 in the array. (Using find by id method).
+const employees = [
+    {id: 1, name: "Amit", salary: 20000},
+    {id: 2, name: "Rahul", salary: 30000},
+    {id: 3, name: "Priya", salary: 40000},
+    {id: 4, name: "Sneha", salary: 22000}
+];
+const emp = employees.find(e => e.salary > 25000);
+console.log(emp);
 
-    public static void main(String[] args) {
+9. Fetch the details using ng-repeat in AngularJS.
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <title>Bank Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <h2>Bank Details</h2>
+    <div ng-init="banks=[
+    {name:'SBI', micr:'400002001', ifsc:'SBIN0001234', address:'Pune'},
+    {name:'HDFC', micr:'400240002', ifsc:'HDFC0001234', address:'Mumbai'},
+    {name:'ICICI', micr:'400229003', ifsc:'ICIC0001234', address:'Delhi'}
+    ]">
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Bank Name</th>
+            <th>MICR Code</th>
+            <th>IFSC Code</th>
+            <th>Address</th>
+        </tr>
+        <tr ng-repeat="bank in banks">
+            <td>{{bank.name}}</td>
+            <td>{{bank.micr}}</td>
+            <td>{{bank.ifsc}}</td>
+            <td>{{bank.address}}</td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>
 
-        Thread t1 = new Thread(() -> {
-            Singleton s = Singleton.getInstance();
-            System.out.println("Thread 1: " + s);
+10. Express.js application to include middleware for parsing request bodies (e.g., JSON, form data) and validating input data. ( Slip 4 and 9 ,10,13
+const express = require('express');
+const app = express();
+// Middleware to parse JSON and form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Input validation middleware
+function validate(req, res, next) {
+    const { name, age, email } = req.body;
+    if (!name || !age || !email) {
+        return res.status(400).json({
+            message: "All fields are required!"
         });
-
-        Thread t2 = new Thread(() -> {
-            Singleton s = Singleton.getInstance();
-            System.out.println("Thread 2: " + s);
+    }
+    if (age < 1 || age > 100) {
+        return res.status(400).json({
+            message: "Invalid age!"
         });
-
-        t1.start();
-        t2.start();
-    }
-}
-
-3. Write a Java Program to implement Factory method for Pizza Store with createPizza(), orederPizza(), prepare(), Bake(), cut(), box(). Use this to create variety of pizza’s like NyStyleCheesePizza, ChicagoStyleCheesePizza etc.
-
-abstract class Pizza {
-    void prepare() {
-        System.out.println("Preparing Pizza");
-    }
-
-    void bake() {
-        System.out.println("Baking Pizza");
-    }
-
-    void cut() {
-        System.out.println("Cutting Pizza");
-    }
-
-    void box() {
-        System.out.println("Packing Pizza");
-    }
-}
-
-class NYStyleCheesePizza extends Pizza {
-    NYStyleCheesePizza() {
-        System.out.println("New York Cheese Pizza");
-    }
-}
-
-class ChicagoStyleCheesePizza extends Pizza {
-    ChicagoStyleCheesePizza() {
-        System.out.println("Chicago Cheese Pizza");
-    }
-}
-
-abstract class PizzaStore {
-    abstract Pizza createPizza();
-
-    Pizza orderPizza() {
-        Pizza p = createPizza();
-        p.prepare();
-        p.bake();
-        p.cut();
-        p.box();
-        return p;
-    }
-}
-
-class NYPizzaStore extends PizzaStore {
-    Pizza createPizza() {
-        return new NYStyleCheesePizza();
-    }
-}
-
-class ChicagoPizzaStore extends PizzaStore {
-    Pizza createPizza() {
-        return new ChicagoStyleCheesePizza();
-    }
-}
-
-public class Slip4 {
-    public static void main(String[] args) {
-        PizzaStore store = new NYPizzaStore();
-        store.orderPizza();
-
-        System.out.println("----------------");
-
-        store = new ChicagoPizzaStore();
-        store.orderPizza();
-    }
-}
-
-	4. Write a JAVA Program to implement built-in support (java.util.Observable) Weather 
-station with members temperature, humidity, pressure and methods 
-mesurmentsChanged(), setMesurment(), getTemperature(), getHumidity(), 
-getPressure().
-
-import java.util.Observable;
-import java.util.Observer;
-
-class WeatherStation extends Observable {
-    float temperature, humidity, pressure;
-
-    void setMeasurement(float t, float h, float p) {
-        temperature = t;
-        humidity = h;
-        pressure = p;
-        measurementsChanged();
-    }
-
-    void measurementsChanged() {
-        setChanged();
-        notifyObservers();
-    }
-
-    float getTemperature() {
-        return temperature;
-    }
-
-    float getHumidity() {
-        return humidity;
-    }
-
-    float getPressure() {
-        return pressure;
-    }
-}
-
-class Display implements Observer {
-    public void update(Observable o, Object arg) {
-        WeatherStation w = (WeatherStation)o;
-        System.out.println("Temperature: " + w.getTemperature());
-        System.out.println("Humidity: " + w.getHumidity());
-        System.out.println("Pressure: " + w.getPressure());
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        WeatherStation w = new WeatherStation();
-        w.addObserver(new Display());
-
-        w.setMeasurement(30, 60, 1013);
-    }
-}
-
-5. Write a Java Program to implement Adapter pattern for Enumeration iterator.
-
-import java.util.*;
-
-class EnumAdapter implements Iterator {
-
-    Enumeration e;
-
-    EnumAdapter(Enumeration e) {
-        this.e = e;
-    }
-
-    public boolean hasNext() {
-        return e.hasMoreElements();
-    }
-
-    public Object next() {
-        return e.nextElement();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        Vector v = new Vector();
-
-        v.add("Apple");
-        v.add("Mango");
-        v.add("Banana");
-
-        Iterator i = new EnumAdapter(v.elements());
-
-        while (i.hasNext()) {
-            System.out.println(i.next());
-        }
-    }
-}
-
-6. Write a Java Program to implement command pattern to test Remote Control
-
-interface Command {
-    void execute();
-}
-class Light {
-    void on() {
-        System.out.println("Light is ON");
-    }
-}
-class LightOnCommand implements Command {
-    Light l;
-    LightOnCommand(Light l) {
-        this.l = l;
-    }
-
-    public void execute() {
-        l.on();
-    }
-}
-class RemoteControl {
-    Command c;
-
-    void setCommand(Command c) {
-        this.c = c;
-    }
-    void pressButton() {
-        c.execute();
-    }
-}
-public class Main {
-    public static void main(String[] args) {
-
-        Light l = new Light();
-        Command cmd = new LightOnCommand(l);
-        RemoteControl r = new RemoteControl();
-        r.setCommand(cmd);
-        r.pressButton();
-    }
-}
-
-7. Write a Java Program to implement undo command to test Ceiling fan.
-
-interface Command {
-    void execute();
-    void undo();
-}
-
-class CeilingFan {
-    void on() {
-        System.out.println("Fan is ON");
-    }
-
-    void off() {
-        System.out.println("Fan is OFF");
-    }
-}
-
-class FanOnCommand implements Command {
-    CeilingFan fan;
-
-    FanOnCommand(CeilingFan fan) {
-        this.fan = fan;
-    }
-
-    public void execute() {
-        fan.on();
-    }
-
-    public void undo() {
-        fan.off();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        CeilingFan fan = new CeilingFan();
-
-        FanOnCommand cmd = new FanOnCommand(fan);
-
-        cmd.execute();
-        cmd.undo();
-    }
-}
-
-8. Write a Java Program to implement State Pattern for Gumball Machine. Create instance variable that holds current state from there, we just need to handle all actions, behaviors and state transition that can happen.
-
-interface State {
-    void insertCoin();
-    void turnCrank();
-    void dispense();
-}
-
-class GumballMachine {
-    State state;
-
-    State noCoin = new NoCoinState(this);
-    State hasCoin = new HasCoinState(this);
-
-    GumballMachine() {
-        state = noCoin;
-    }
-
-    void insertCoin() {
-        state.insertCoin();
-    }
-
-    void turnCrank() {
-        state.turnCrank();
-    }
-
-    void dispense() {
-        state.dispense();
-    }
-
-    void setState(State s) {
-        state = s;
-    }
-}
-
-class NoCoinState implements State {
-    GumballMachine machine;
-
-    NoCoinState(GumballMachine m) {
-        machine = m;
-    }
-
-    public void insertCoin() {
-        System.out.println("Coin Inserted");
-        machine.setState(machine.hasCoin);
-    }
-
-    public void turnCrank() {
-        System.out.println("Insert Coin First");
-    }
-
-    public void dispense() {
-        System.out.println("No Gumball");
-    }
-}
-
-class HasCoinState implements State {
-    GumballMachine machine;
-
-    HasCoinState(GumballMachine m) {
-        machine = m;
-    }
-
-    public void insertCoin() {
-        System.out.println("Coin Already Inserted");
-    }
-
-    public void turnCrank() {
-        System.out.println("Crank Turned");
-        machine.dispense();
-    }
-
-    public void dispense() {
-        System.out.println("Gumball Dispensed");
-        machine.setState(machine.noCoin);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        GumballMachine g = new GumballMachine();
-
-        g.insertCoin();
-        g.turnCrank();
-    }
-}
-
-9. Design simple HR Application using Spring Framework.
-
-Employee.java
-
-public class Employee {
-    int id;
-    String name;
-    String department;
-
-    public Employee(int id, String name, String department) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-    }
-
-    public void display() {
-        System.out.println(id + " " + name + " " + department);
-    }
-}
-
-EmployeeService.java
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class EmployeeService {
-
-    public void showEmployee() {
-        Employee e = new Employee(101, "Rahul", "HR");
-        e.display();
-    }
-}
-
-EmployeeController.java
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-@Controller
-public class EmployeeController {
-
-    @Autowired
-    EmployeeService service;
-
-    public void display() {
-        service.showEmployee();
-    }
-}
-
-Main.java
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-public class Main {
-    public static void main(String[] args) {
-
-        ApplicationContext context =
-            new AnnotationConfigApplicationContext("com.example");
-
-        EmployeeController obj =
-            context.getBean(EmployeeController.class);
-
-        obj.display();
-    }
-}
-
-10. Write a Java Program to implement Strategy Pattern for Duck Behavior. Create instance variable that holds current state of Duck from there, we just need to handle all Flying Behaviors and Quack Behavior.
-
-interface FlyBehavior {
-    void fly();
-}
-
-interface QuackBehavior {
-    void quack();
-}
-
-class FlyWithWings implements FlyBehavior {
-    public void fly() {
-        System.out.println("Duck is Flying");
-    }
-}
-
-class Quack implements QuackBehavior {
-    public void quack() {
-        System.out.println("Duck is Quacking");
-    }
-}
-
-class Duck {
-    FlyBehavior flyBehavior;
-    QuackBehavior quackBehavior;
-
-    Duck(FlyBehavior f, QuackBehavior q) {
-        flyBehavior = f;
-        quackBehavior = q;
-    }
-
-    void performFly() {
-        flyBehavior.fly();
-    }
-
-    void performQuack() {
-        quackBehavior.quack();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        Duck d = new Duck(
-            new FlyWithWings(),
-            new Quack()
-        );
-
-        d.performFly();
-        d.performQuack();
-    }
-}
-
-11. Write a java program to implement Adapter pattern to design Heart Model to Beat Model.
-
-interface BeatModel {
-    void on();
-    void off();
-    void beat();
-}
-
-class HeartModel {
-    void start() {
-        System.out.println("Heart Started");
-    }
-
-    void stop() {
-        System.out.println("Heart Stopped");
-    }
-
-    void heartBeat() {
-        System.out.println("Heart is Beating");
-    }
-}
-
-class HeartAdapter implements BeatModel {
-    HeartModel heart = new HeartModel();
-
-    public void on() {
-        heart.start();
-    }
-
-    public void off() {
-        heart.stop();
-    }
-
-    public void beat() {
-        heart.heartBeat();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        BeatModel beat = new HeartAdapter();
-
-        beat.on();
-        beat.beat();
-        beat.off();
-    }
-}
-
-12. Write a Java Program to implement Decorator Pattern for interface Car to define the assemble() method and then decorate it to Sports car and Luxury Car.
-
-interface Car {
-    void assemble();
-}
-
-class BasicCar implements Car {
-    public void assemble() {
-        System.out.println("Basic Car");
-    }
-}
-
-class SportsCar implements Car {
-    Car car;
-
-    SportsCar(Car car) {
-        this.car = car;
-    }
-
-    public void assemble() {
-        car.assemble();
-        System.out.println("Sports Car");
-    }
-}
-
-class LuxuryCar implements Car {
-    Car car;
-
-    LuxuryCar(Car car) {
-        this.car = car;
-    }
-
-    public void assemble() {
-        car.assemble();
-        System.out.println("Luxury Car");
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        Car car = new BasicCar();
-
-        car = new SportsCar(car);
-        car = new LuxuryCar(car);
-
-        car.assemble();
-    }
-}
-
-13. Write a Java Program to implement an Adapter design pattern in mobile charger. Define two classes – Volt (to measure volts) and Socket (producing constant volts of 120V). Build an adapter that can produce 3 volts, 12 volts and default 120 volts. Implements Adapter pattern using Class Adapter.
-
-class Volt {
-    int volts;
-
-    Volt(int v) {
-        volts = v;
-    }
-
-    int getVolts() {
-        return volts;
-    }
-}
-
-class Socket {
-    Volt getVolt() {
-        return new Volt(120);
-    }
-}
-
-class SocketAdapter extends Socket {
-
-    Volt get3Volt() {
-        return new Volt(3);
-    }
-
-    Volt get12Volt() {
-        return new Volt(12);
-    }
-
-    Volt get120Volt() {
-        return getVolt();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        SocketAdapter s = new SocketAdapter();
-
-        System.out.println("3V: " + s.get3Volt().getVolts());
-        System.out.println("12V: " + s.get12Volt().getVolts());
-        System.out.println("120V: " + s.get120Volt().getVolts());
-    }
-}
-
-
-14. Write a Java Program to implement Command Design Pattern for Command Interface with execute() . Use this to create variety of commands for LightOnCommand, LightOffCommand, GarageDoorUpCommand, StereoOnWithCDComman.
-
-interface Command {
-    void execute();
-}
-
-class Light {
-    void on() {
-        System.out.println("Light is ON");
-    }
-
-    void off() {
-        System.out.println("Light is OFF");
-    }
-}
-
-class GarageDoor {
-    void up() {
-        System.out.println("Garage Door is UP");
-    }
-}
-
-class Stereo {
-    void on() {
-        System.out.println("Stereo is ON with CD");
-    }
-}
-
-class LightOnCommand implements Command {
-    Light l;
-
-    LightOnCommand(Light l) {
-        this.l = l;
-    }
-
-    public void execute() {
-        l.on();
-    }
-}
-
-class LightOffCommand implements Command {
-    Light l;
-
-    LightOffCommand(Light l) {
-        this.l = l;
-    }
-
-    public void execute() {
-        l.off();
-    }
-}
-
-class GarageDoorUpCommand implements Command {
-    GarageDoor g;
-
-    GarageDoorUpCommand(GarageDoor g) {
-        this.g = g;
-    }
-
-    public void execute() {
-        g.up();
-    }
-}
-
-class StereoOnWithCDCommand implements Command {
-    Stereo s;
-
-    StereoOnWithCDCommand(Stereo s) {
-        this.s = s;
-    }
-
-    public void execute() {
-        s.on();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        Light l = new Light();
-        GarageDoor g = new GarageDoor();
-        Stereo s = new Stereo();
-
-        Command c1 = new LightOnCommand(l);
-        Command c2 = new LightOffCommand(l);
-        Command c3 = new GarageDoorUpCommand(g);
-        Command c4 = new StereoOnWithCDCommand(s);
-
-        c1.execute();
-        c2.execute();
-        c3.execute();
-        c4.execute();
-    }
-}
-
-15. Write a Java Program to implement Facade Design Pattern for Home Theater.
-
-class DVD {
-    void on() {
-        System.out.println("DVD is ON");
-    }
-}
-
-class Projector {
-    void on() {
-        System.out.println("Projector is ON");
-    }
-}
-
-class SoundSystem {
-    void on() {
-        System.out.println("Sound System is ON");
-    }
-}
-
-class HomeTheaterFacade {
-    DVD d = new DVD();
-    Projector p = new Projector();
-    SoundSystem s = new SoundSystem();
-
-    void watchMovie() {
-        d.on();
-        p.on();
-        s.on();
-        System.out.println("Movie Started");
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        HomeTheaterFacade h = new HomeTheaterFacade();
-        h.watchMovie();
-    }
-}
-
-16. Write a Java Program to implement Observer Design Pattern for number conversion. Accept a number in Decimal form and represent it in Hexadecimal, Octal and Binary. Change the Number and it reflects in other forms also.
-
-import java.util.*;
-
-class Number {
-    int num;
-    ArrayList<Observer> list = new ArrayList<>();
-
-    void addObserver(Observer o) {
-        list.add(o);
-    }
-
-    void setNumber(int n) {
-        num = n;
-        for (Observer o : list)
-            o.update(num);
-    }
-}
-
-interface Observer {
-    void update(int n);
-}
-
-class Binary implements Observer {
-    public void update(int n) {
-        System.out.println("Binary: " + Integer.toBinaryString(n));
-    }
-}
-
-class Octal implements Observer {
-    public void update(int n) {
-        System.out.println("Octal: " + Integer.toOctalString(n));
-    }
-}
-
-class Hexadecimal implements Observer {
-    public void update(int n) {
-        System.out.println("Hexadecimal: " + Integer.toHexString(n));
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        Number num = new Number();
-
-        num.addObserver(new Binary());
-        num.addObserver(new Octal());
-        num.addObserver(new Hexadecimal());
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter Decimal Number: ");
-        num.setNumber(sc.nextInt());
-
-        sc.close();
-    }
-}
-
-17. Write a Java Program to implement Abstract Factory Pattern for Shape interface.
-
-interface Shape {
-    void draw();
-}
-
-class Circle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Circle");
-    }
-}
-
-class Rectangle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Rectangle");
-    }
-}
-
-interface AbstractFactory {
-    Shape getShape(String type);
-}
-
-class ShapeFactory implements AbstractFactory {
-    public Shape getShape(String type) {
-        if (type.equalsIgnoreCase("Circle"))
-            return new Circle();
-        else if (type.equalsIgnoreCase("Rectangle"))
-            return new Rectangle();
-
-        return null;
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-
-        AbstractFactory factory = new ShapeFactory();
-
-        Shape s1 = factory.getShape("Circle");
-        Shape s2 = factory.getShape("Rectangle");
-
-        s1.draw();
-        s2.draw();
     }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        return res.status(400).json({
+            message: "Invalid email!"
+        });
+    }
+    next();
+}
+// Display HTML form
+app.get('/', (req, res) => {
+    res.send(`
+        <h2>Student Registration</h2>
+        <form action="/student" method="POST">
+            Name: <input name="name" required><br><br>
+            Age: <input name="age" type="number" required><br><br>
+            Email: <input name="email" type="email" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    `);
+});
+// POST route
+app.post('/student', validate, (req, res) => {
+    res.status(200).json({
+        message: "Student data submitted successfully!",
+        student: req.body
+    });
+});
+// Start server
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
+11. Create Angular application that print the name of students who play basketball using filter and map method.
+(ng new student-app).
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `
+    <h2>Students Who Play Basketball</h2>
+    <button (click)="showStudents()">Show Students</button>
+
+    <ul>
+      <li *ngFor="let name of result">{{name}}</li>
+    </ul>
+  `
+})
+export class AppComponent {
+
+  students = [
+    {name: 'Rahul', game: 'Basketball'},
+    {name: 'Amit', game: 'Cricket'},
+    {name: 'Priya', game: 'Basketball'},
+    {name: 'Sneha', game: 'Football'}
+  ];
+
+  result: string[] = [];
+
+  showStudents() {
+    this.result = this.students
+      .filter(s => s.game === 'Basketball')
+      .map(s => s.name);
+  }
+}
+
+12. Write an AngularJS script to print details of Employee (employee name, employee Id,Pin code, address etc.) in tabular form using ng-repeat.
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <title>Employee Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-init="employees=[
+    {id:101, name:'Rahul', pin:411001, address:'Pune'},
+    {id:102, name:'Amit', pin:411002, address:'Mumbai'},
+    {id:103, name:'Priya', pin:411003, address:'Nashik'}
+]">
+    <h2>Employee Details</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Pin Code</th>
+            <th>Address</th>
+        </tr>
+        <tr ng-repeat="emp in employees">
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.pin}}</td>
+            <td>{{emp.address}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+13. Develop an Express.js application that defines routes for Create and Read operations 
+on a resource (products). (app.js)
+const express = require('express');
+const app = express();
+app.use(express.json());
+// Products array
+let products = [];
+// CREATE - POST route
+app.post('/products', (req, res) => {
+    products.push(req.body);
+    res.send("Product added successfully!");
+});
+// READ - GET route
+app.get('/products', (req, res) => {
+    res.json(products);
+});
+// Start server
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
+POSTMAN:- POST
+{
+    "id": 1,
+    "name": "Laptop",
+    "price": 50000
+}
+
+GET:- [
+    {
+        "id": 1,
+        "name": "Laptop",
+        "price": 50000
+    }
+]
+
+14. Create a simple Angular application that fetches data from an API using HttpClient. Implement an Observable to fetch data from an API endpoint.
+-> ng new myapp
+cd myapp
+ng serve
+
+Open app.config.ts and add provideHttpClient()
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient()]
+};
+
+Write Code in app.component.ts
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <h2>Users List</h2>
+
+    <button (click)="getUsers()">Fetch Users</button>
+
+    <ul>
+      <li *ngFor="let user of users">
+        {{user.name}}
+      </li>
+    </ul>
+  `
+})
+export class AppComponent {
+
+  users: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  getUsers() {
+    const data: Observable<any> =
+      this.http.get('https://jsonplaceholder.typicode.com/users');
+
+    data.subscribe(response => {
+      this.users = response;
+    });
+  }
 }
 
 
